@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>URO · 30-Day Launch Plan · Dhaka</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --void:#0a0d08;--deep:#111a0c;--bark:#1e2d14;--moss:#2d4a1a;
+  --leaf:#4a7a28;--sage:#7aad4a;--mist:#b8d494;--cream:#f5f0e4;
+  --gold:#c8a03c;--amber:#e8b84b;--heat:#d4522a;--ink:#0d1208;
+  --blue:#1a3a5a;--red:#5a1a1a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--cream);font-family:'Syne',sans-serif;font-size:14px;line-height:1.6;overflow-x:hidden;}
+
+/* COVER */
+.cover{
+  min-height:100vh;
+  background:var(--deep);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:60px 40px;
+  position:relative;overflow:hidden;
+}
+.cover::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(74,122,40,0.2) 0%,transparent 70%),
+             radial-gradient(ellipse 50% 40% at 20% 10%,rgba(212,82,42,0.08) 0%,transparent 60%);
+}
+.cover-eyebrow{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--sage);
+  border:1px solid rgba(122,173,74,0.3);padding:6px 18px;border-radius:2px;
+  margin-bottom:36px;position:relative;z-index:1;
+}
+.cover h1{
+  font-family:'Playfair Display',serif;font-size:clamp(42px,7vw,88px);
+  color:var(--cream);line-height:1.0;margin-bottom:16px;position:relative;z-index:1;
+}
+.cover h1 em{font-style:italic;color:var(--sage);}
+.cover h1 span{color:var(--amber);}
+.cover-sub{
+  font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;
+  color:rgba(245,240,228,0.5);margin-bottom:60px;position:relative;z-index:1;
+}
+.cover-meta{display:flex;gap:56px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;}
+.cm-item .val{font-family:'Playfair Display',serif;font-size:28px;color:var(--cream);}
+.cm-item .lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);}
+
+/* NAV */
+nav{
+  background:rgba(17,26,12,0.97);border-bottom:1px solid rgba(122,173,74,0.1);
+  padding:0 40px;position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none;}
+nav a{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;
+  text-transform:uppercase;color:rgba(245,240,228,0.45);
+  text-decoration:none;padding:16px 14px;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:all .2s;
+}
+nav a:hover{color:var(--sage);border-bottom-color:var(--sage);}
+
+/* PAGE */
+.page{max-width:1100px;margin:0 auto;padding:72px 40px;}
+section{scroll-margin-top:52px;}
+hr.div{border:none;border-top:1px solid rgba(122,173,74,0.1);margin:0 40px;}
+
+/* SECTION HEADER */
+.sh{display:flex;align-items:flex-start;gap:20px;margin-bottom:44px;padding-bottom:20px;border-bottom:1px solid rgba(122,173,74,0.15);}
+.sh-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--sage);background:rgba(122,173,74,0.08);border:1px solid rgba(122,173,74,0.2);padding:5px 10px;border-radius:2px;white-space:nowrap;margin-top:6px;flex-shrink:0;}
+.sh h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);color:var(--cream);line-height:1.1;margin-bottom:6px;}
+.sh h2 em{font-style:italic;color:var(--sage);}
+.sh p{font-size:13px;color:rgba(245,240,228,0.5);max-width:560px;}
+
+/* WEEK BLOCKS */
+.week-block{margin-bottom:48px;}
+.week-header{
+  background:var(--bark);border:1px solid rgba(122,173,74,0.15);
+  border-radius:10px 10px 0 0;padding:20px 28px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.week-num{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--sage);
+  background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.2);
+  padding:4px 12px;border-radius:2px;
+}
+.week-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);}
+.week-theme{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;
+  color:rgba(245,240,228,0.4);margin-left:auto;
+}
+.week-days{
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(122,173,74,0.08);
+  border-top:none;
+  border-radius:0 0 10px 10px;
+  overflow:hidden;
+}
+.day-row{
+  display:grid;
+  grid-template-columns:80px 1fr;
+  border-bottom:1px solid rgba(122,173,74,0.06);
+  transition:background .2s;
+}
+.day-row:last-child{border-bottom:none;}
+.day-row:hover{background:rgba(122,173,74,0.03);}
+.day-label{
+  padding:18px 20px;
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--sage);font-weight:500;
+  border-right:1px solid rgba(122,173,74,0.08);
+  display:flex;align-items:flex-start;justify-content:center;
+  text-align:center;flex-shrink:0;line-height:1.4;
+  background:rgba(122,173,74,0.03);
+}
+.day-content{padding:18px 24px;}
+.day-tasks{display:flex;flex-direction:column;gap:10px;}
+.task{display:flex;align-items:flex-start;gap:12px;}
+.task-channel{
+  flex-shrink:0;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;
+  text-transform:uppercase;padding:3px 8px;border-radius:3px;
+  white-space:nowrap;margin-top:1px;
+}
+.task-channel.web{background:rgba(122,173,74,0.12);border:1px solid rgba(122,173,74,0.25);color:var(--sage);}
+.task-channel.ig{background:rgba(200,160,60,0.1);border:1px solid rgba(200,160,60,0.25);color:var(--gold);}
+.task-channel.ground{background:rgba(212,82,42,0.1);border:1px solid rgba(212,82,42,0.25);color:var(--heat);}
+.task-channel.crm{background:rgba(42,74,106,0.15);border:1px solid rgba(42,74,106,0.3);color:#7ab0d4;}
+.task-channel.ref{background:rgba(90,26,90,0.15);border:1px solid rgba(180,74,180,0.25);color:#c47ac4;}
+.task-channel.wa{background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25D366;}
+.task-channel.all{background:rgba(245,240,228,0.07);border:1px solid rgba(245,240,228,0.15);color:rgba(245,240,228,0.6);}
+.task-text{font-size:13px;color:rgba(245,240,228,0.75);line-height:1.5;flex:1;}
+.task-text strong{color:var(--cream);}
+
+/* CHANNEL LEGEND */
+.channel-legend{
+  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;
+  padding:20px 24px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(122,173,74,0.1);
+  border-radius:8px;
+}
+.cl-item{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(245,240,228,0.55);}
+
+/* MARKETING CHANNEL CARDS */
+.mkt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px;}
+.mkt-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(122,173,74,0.12);
+  border-radius:10px;padding:28px;
+  transition:border-color .25s;
+}
+.mkt-card:hover{border-color:rgba(122,173,74,0.3);}
+.mkt-icon{font-size:28px;margin-bottom:14px;}
+.mkt-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--cream);margin-bottom:8px;}
+.mkt-desc{font-size:12px;color:rgba(245,240,228,0.5);line-height:1.6;margin-bottom:16px;}
+.mkt-tactics{list-style:none;}
+.mkt-tactics li{font-size:12px;color:rgba(245,240,228,0.65);padding:5px 0;border-bottom:1px solid rgba(122,173,74,0.07);display:flex;gap:8px;}
+.mkt-tactics li:last-child{border-bottom:none;}
+.mkt-tactics li::before{content:'→';color:var(--sage);flex-shrink:0;}
+
+/* INSTAGRAM CONTENT PLAN */
+.ig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:40px;}
+.ig-post{
+  background:rgba(30,45,20,0.5);
+  border:1px solid rgba(122,173,74,0.12);
+  border-radius:10px;overflow:hidden;
+  transition:transform .25s,border-color .25s;
+}
+.ig-post:hover{transform:translateY(-4px);border-color:rgba(122,173,74,0.3);}
+.ig-thumb{
+  height:120px;display:flex;align-items:center;justify-content:center;
+  font-size:40px;position:relative;
+}
+.ig-thumb.green{background:linear-gradient(135deg,#1a3010,#2d5020);}
+.ig-thumb.amber{background:linear-gradient(135deg,#2a1a04,#4a3010);}
+.ig-thumb.heat{background:linear-gradient(135deg,#2a0a04,#5a1a0a);}
+.ig-body{padding:14px;}
+.ig-week{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);margin-bottom:5px;}
+.ig-caption{font-size:12px;color:rgba(245,240,228,0.75);line-height:1.5;margin-bottom:8px;}
+.ig-format{
+  display:inline-block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;
+  text-transform:uppercase;padding:2px 8px;border-radius:3px;
+}
+.ig-format.reel{background:rgba(212,82,42,0.1);border:1px solid rgba(212,82,42,0.25);color:var(--heat);}
+.ig-format.carousel{background:rgba(200,160,60,0.1);border:1px solid rgba(200,160,60,0.25);color:var(--gold);}
+.ig-format.single{background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.2);color:var(--sage);}
+
+/* OUTREACH SCRIPTS */
+.script-card{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.12);
+  border-radius:10px;overflow:hidden;margin-bottom:20px;
+}
+.sc-header{
+  background:var(--bark);padding:16px 24px;
+  display:flex;align-items:center;gap:12px;
+}
+.sc-icon{font-size:18px;}
+.sc-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--cream);}
+.sc-channel{
+  margin-left:auto;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;
+  text-transform:uppercase;padding:3px 8px;border-radius:3px;
+}
+.sc-body{padding:20px 24px;}
+.script-text{
+  background:rgba(122,173,74,0.05);border:1px solid rgba(122,173,74,0.15);
+  border-left:3px solid var(--sage);border-radius:4px;
+  padding:16px 18px;
+  font-size:13px;color:rgba(245,240,228,0.8);line-height:1.75;
+  font-style:italic;margin-bottom:12px;
+}
+.script-note{font-size:11px;color:rgba(245,240,228,0.4);line-height:1.6;}
+.script-note strong{color:rgba(122,173,74,0.8);}
+
+/* KPI TARGETS */
+.kpi-row{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;
+  margin-bottom:32px;
+}
+.kpi-box{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.12);
+  border-radius:8px;padding:20px 16px;text-align:center;
+}
+.kpi-period{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:8px;}
+.kpi-val{font-family:'Playfair Display',serif;font-size:26px;color:var(--amber);line-height:1;margin-bottom:5px;}
+.kpi-name{font-size:11px;color:rgba(245,240,228,0.5);line-height:1.4;}
+
+/* GITHUB DEPLOY */
+.deploy-steps{display:flex;flex-direction:column;gap:0;border:1px solid rgba(122,173,74,0.15);border-radius:8px;overflow:hidden;margin-bottom:32px;}
+.ds-row{display:grid;grid-template-columns:48px 1fr;border-bottom:1px solid rgba(122,173,74,0.07);}
+.ds-row:last-child{border-bottom:none;}
+.ds-num{background:rgba(122,173,74,0.08);border-right:1px solid rgba(122,173,74,0.1);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;color:var(--sage);}
+.ds-content{padding:16px 20px;}
+.ds-title{font-size:13px;font-weight:600;color:var(--cream);margin-bottom:4px;}
+.ds-desc{font-size:12px;color:rgba(245,240,228,0.5);line-height:1.5;}
+.code-block{
+  background:#0d1208;border:1px solid rgba(122,173,74,0.15);
+  border-radius:6px;padding:16px 18px;margin-top:10px;
+  font-family:'DM Mono',monospace;font-size:12px;color:var(--sage);
+  line-height:1.8;overflow-x:auto;
+}
+.code-block .comment{color:rgba(122,173,74,0.4);}
+.code-block .cmd{color:var(--mist);}
+
+/* INFO / WARN BOXES */
+.info-box{background:rgba(122,173,74,0.07);border:1px solid rgba(122,173,74,0.2);border-left:3px solid var(--sage);border-radius:4px;padding:14px 18px;margin-bottom:20px;font-size:12px;color:rgba(245,240,228,0.7);line-height:1.6;}
+.info-box strong{color:var(--sage);}
+.warn-box{background:rgba(212,82,42,0.07);border:1px solid rgba(212,82,42,0.2);border-left:3px solid var(--heat);border-radius:4px;padding:14px 18px;margin-bottom:20px;font-size:12px;color:rgba(245,240,228,0.7);line-height:1.6;}
+.warn-box strong{color:var(--heat);}
+
+/* FOOTER */
+footer{background:var(--void);border-top:1px solid rgba(122,173,74,0.1);padding:48px 40px;text-align:center;}
+.f-brand{font-family:'Playfair Display',serif;font-size:24px;color:var(--sage);font-style:italic;margin-bottom:10px;}
+.f-note{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,228,0.2);}
+
+@media(max-width:768px){
+  .page{padding:48px 20px;}
+  .mkt-grid{grid-template-columns:1fr;}
+  .day-row{grid-template-columns:60px 1fr;}
+  nav{padding:0 20px;}
+  .cover{padding:60px 24px;}
+  .cover-meta{gap:28px;}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Urban Rooftop Oasis · Dhaka Launch Plan</div>
+  <h1>30 Days to<br/><em>First Client.</em><br/><span>Dhaka.</span></h1>
+  <p class="cover-sub">Website Live · Instagram Running · Network Activated · First Lead Closed</p>
+  <div class="cover-meta">
+    <div class="cm-item"><div class="val">30</div><div class="lbl">Day plan</div></div>
+    <div class="cm-item"><div class="val">3</div><div class="lbl">Hunt channels</div></div>
+    <div class="cm-item"><div class="val">৳0</div><div class="lbl">Website cost</div></div>
+    <div class="cm-item"><div class="val">1</div><div class="lbl">Target: first close</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#website">Website Deploy</a>
+  <a href="#week1">Week 1</a>
+  <a href="#week2">Week 2</a>
+  <a href="#week3">Week 3</a>
+  <a href="#week4">Week 4</a>
+  <a href="#instagram">Instagram Plan</a>
+  <a href="#outreach">Outreach Scripts</a>
+  <a href="#targets">Targets</a>
+</nav>
+
+<!-- ══════════════════════════════════════
+     WEBSITE DEPLOYMENT
+══════════════════════════════════════ -->
+<section id="website">
+<div class="page">
+  <div class="sh">
+    <span class="sh-num">00</span>
+    <div>
+      <h2>Deploy Your Website<br/><em>Free on GitHub Pages</em></h2>
+      <p>Zero cost. Custom domain optional. Live in under 30 minutes. Do this on Day 1 before anything else.</p>
+    </div>
+  </div>
+
+  <div class="deploy-steps">
+    <div class="ds-row">
+      <div class="ds-num">1</div>
+      <div class="ds-content">
+        <div class="ds-title">Create a GitHub account</div>
+        <div class="ds-desc">Go to github.com → Sign up free. Use your business email (hello@urbanrooftopoasis.com once set up).</div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-num">2</div>
+      <div class="ds-content">
+        <div class="ds-title">Create a new repository</div>
+        <div class="ds-desc">Click "New repository" → Name it exactly: <strong>urbanrooftopoasis.github.io</strong> → Set to Public → Click "Create repository"</div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-num">3</div>
+      <div class="ds-content">
+        <div class="ds-title">Upload your index.html file</div>
+        <div class="ds-desc">Click "uploading an existing file" → drag and drop the index.html website file provided → Commit changes.</div>
+        <div class="code-block">
+          <span class="comment"># OR via terminal if you prefer:</span><br/>
+          <span class="cmd">git clone https://github.com/YOUR_USERNAME/urbanrooftopoasis.github.io</span><br/>
+          <span class="cmd">cd urbanrooftopoasis.github.io</span><br/>
+          <span class="cmd">cp /path/to/index.html .</span><br/>
+          <span class="cmd">git add . && git commit -m "Launch URO website"</span><br/>
+          <span class="cmd">git push origin main</span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-num">4</div>
+      <div class="ds-content">
+        <div class="ds-title">Enable GitHub Pages</div>
+        <div class="ds-desc">In your repository → Settings → Pages → Source: Deploy from branch → Branch: main → /root → Save. Wait 2–3 minutes.</div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-num">5</div>
+      <div class="ds-content">
+        <div class="ds-title">Your website is live! 🎉</div>
+        <div class="ds-desc">URL: <strong>https://urbanrooftopoasis.github.io</strong> — Share this immediately. Works perfectly on mobile. Free forever.</div>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-num">6</div>
+      <div class="ds-content">
+        <div class="ds-title">Update before going live</div>
+        <div class="ds-desc">In index.html, find and replace: <strong>+880 1XXX-XXXXXX</strong> with your real WhatsApp number. Update the WhatsApp href links too. Replace the Instagram/Facebook links with your real profiles.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>Free custom domain (optional):</strong> If you later want www.urbanrooftopoasis.com — domains cost ~৳1,500/year from Namecheap. Point it to GitHub Pages via CNAME record. But for launch: the .github.io URL works perfectly. Don't delay launch for a domain.
+  </div>
+
+  <div class="mkt-grid">
+    <div class="mkt-card">
+      <div class="mkt-icon">📱</div>
+      <div class="mkt-title">Personal Network & Referrals</div>
+      <div class="mkt-desc">Your warmest, fastest, highest-converting channel. Every person you know is a potential client or referral source.</div>
+      <ul class="mkt-tactics">
+        <li>WhatsApp broadcast to 50+ contacts with website link</li>
+        <li>Personal message to building owners you know directly</li>
+        <li>Ask family members to share in their networks</li>
+        <li>Facebook personal page post with rooftop problem hook</li>
+        <li>Offer 10% discount to first 3 pilot clients</li>
+      </ul>
+    </div>
+    <div class="mkt-card">
+      <div class="mkt-icon">📸</div>
+      <div class="mkt-title">Instagram Content Engine</div>
+      <div class="mkt-desc">Visual proof drives this business. Instagram is your portfolio, sales page, and trust builder simultaneously.</div>
+      <ul class="mkt-tactics">
+        <li>3 posts per week minimum — Reels perform best</li>
+        <li>Heat problem hook → green solution reveal format</li>
+        <li>Before/after rooftop transformations (use nursery)</li>
+        <li>Behind-the-scenes: planting, soil prep, installation</li>
+        <li>Target hashtags: #DhakaRooftop #BangladeshGarden #GreenDhaka</li>
+      </ul>
+    </div>
+    <div class="mkt-card">
+      <div class="mkt-icon">🚶</div>
+      <div class="mkt-title">On-Ground Canvassing</div>
+      <div class="mkt-desc">Walk Gulshan, Banani, Dhanmondi, Bashundhara. Identify buildings with empty rooftops. Direct approach works in Dhaka.</div>
+      <ul class="mkt-tactics">
+        <li>Visit upscale residential buildings directly</li>
+        <li>Identify the building owner or caretaker (darwan)</li>
+        <li>Leave a professionally printed one-pager + WhatsApp</li>
+        <li>Real estate agent partnerships (they know all owners)</li>
+        <li>Building management companies — pitch multiple units</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+<hr class="div"/>
+
+<!-- ══════════════════════════════════════
+     WEEK 1
+══════════════════════════════════════ -->
+<section id="week1">
+<div class="page">
+  <div class="sh">
+    <span class="sh-num">Week 1</span>
+    <div>
+      <h2>Foundation &<br/><em>First Signals</em></h2>
+      <p>Days 1–7. Website live. Systems active. Network messaged. First Instagram posts. First inquiries starting.</p>
+    </div>
+  </div>
+
+  <div class="channel-legend">
+    <div class="cl-item"><span class="task-channel web">Web</span> Website / GitHub</div>
+    <div class="cl-item"><span class="task-channel ig">IG</span> Instagram</div>
+    <div class="cl-item"><span class="task-channel ground">Ground</span> On-ground canvassing</div>
+    <div class="cl-item"><span class="task-channel crm">CRM</span> Airtable / Systems</div>
+    <div class="cl-item"><span class="task-channel ref">Ref</span> Referral network</div>
+    <div class="cl-item"><span class="task-channel wa">WA</span> WhatsApp</div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header">
+      <span class="week-num">Week 1</span>
+      <div class="week-title">Launch Everything Simultaneously</div>
+      <div class="week-theme">Days 1–7 · Target: Website live + 3 posts + 20 personal messages sent</div>
+    </div>
+    <div class="week-days">
+      <div class="day-row">
+        <div class="day-label">Day<br/>1</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel web">Web</span><div class="task-text"><strong>Deploy website to GitHub Pages.</strong> Follow the 6-step deploy guide above. Update your real phone number before going live. Test on mobile.</div></div>
+            <div class="task"><span class="task-channel crm">CRM</span><div class="task-text"><strong>Set up Airtable base.</strong> Create Leads table with all fields from the Execution Companion. Create the Kanban view by status.</div></div>
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Create Instagram Business account</strong> @urbanrooftopoasis. Write bio: "🌿 Dhaka's rooftop garden experts. Design → Install → Maintain. Free design in 48hrs ↓". Add website link.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>2</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel wa">WA</span><div class="task-text"><strong>Set up WhatsApp Business.</strong> Business name, profile photo (logo), business description, quick reply templates for: "Thank you for your enquiry", "Mood Board coming in 48hrs", "How can I help?"</div></div>
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #1 — Brand Introduction.</strong> Reel: 30 seconds. Hook: "Dhaka's rooftops are baking at 48°C. We're changing that." Show nursery plants + before/after concept. End: "Free design, link in bio."</div></div>
+            <div class="task"><span class="task-channel ref">Ref</span><div class="task-text"><strong>Write your personal WhatsApp broadcast message</strong> (see outreach scripts below). Send to your first 25 contacts — prioritise anyone you know who owns a building.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>3</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ground">Ground</span><div class="task-text"><strong>First canvassing session — Gulshan.</strong> Walk for 2 hours. Identify 10 buildings with empty/underused rooftops. Note addresses. Speak to the darwan or building manager. Leave your one-pager.</div></div>
+            <div class="task"><span class="task-channel ref">Ref</span><div class="task-text"><strong>Continue broadcast.</strong> Send your personal message to the next 25 contacts. Follow up personally with anyone who replied on Day 2.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>4</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #2 — Heat Problem Carousel.</strong> 5 slides: Slide 1: "Your Dhaka rooftop: 48°C" (hook). Slides 2–4: The 3 problems (no plant knowledge, soil ignorance, high mortality). Slide 5: "We solve all three."</div></div>
+            <div class="task"><span class="task-channel crm">CRM</span><div class="task-text"><strong>Set up n8n WF-01</strong> (intake form → Airtable). Test with a dummy submission. Verify the Google Drive video routing and the WhatsApp alert to yourself fires correctly.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>5</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ground">Ground</span><div class="task-text"><strong>Canvass Dhanmondi / Banani.</strong> 2-hour session. Target: residential buildings 5–10 storeys. Speak directly to anyone you can — owners, managers, residents. Leave materials.</div></div>
+            <div class="task"><span class="task-channel ref">Ref</span><div class="task-text"><strong>Facebook post on personal profile.</strong> Use the heat hook + your website link. Ask friends to share. Tag anyone you know who owns property in Dhaka.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>6</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #3 — Bundle Reveal Carousel.</strong> "3 types of rooftop gardens we create in Dhaka." One slide each for: Aesthetic Lounge, Urban Orchard, Climate Cooler. Last slide: link in bio CTA.</div></div>
+            <div class="task"><span class="task-channel ref">Ref</span><div class="task-text"><strong>Contact 3 real estate agents directly.</strong> WhatsApp or call agents who sell/rent residential property in Dhaka. Propose: "If you refer a client who installs, I'll pay you a referral commission."</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>7</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel all">All</span><div class="task-text"><strong>Week 1 Review.</strong> Check Airtable: How many leads came in? From which source? Any mood boards to send? Follow up on any replies to your broadcast. Plan Week 2 based on what worked.</div></div>
+            <div class="task"><span class="task-channel crm">CRM</span><div class="task-text"><strong>Build your one-pager printout</strong> for canvassing: A5 card. Front: URO logo + headline + QR code to website. Back: 3 bundles + WhatsApp number. Print 50 copies.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<hr class="div"/>
+
+<!-- ══════════════════════════════════════
+     WEEK 2
+══════════════════════════════════════ -->
+<section id="week2">
+<div class="page">
+  <div class="sh">
+    <span class="sh-num">Week 2</span>
+    <div>
+      <h2>First Leads &<br/><em>First Mood Boards</em></h2>
+      <p>Days 8–14. You should be receiving your first enquiries. Every lead gets a Mood Board within 48 hours. Keep the canvassing pressure on.</p>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header">
+      <span class="week-num">Week 2</span>
+      <div class="week-title">Respond Fast. Build Trust.</div>
+      <div class="week-theme">Days 8–14 · Target: 3+ leads received, 3 mood boards delivered</div>
+    </div>
+    <div class="week-days">
+      <div class="day-row">
+        <div class="day-label">Day<br/>8–9</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #4 — Dhaka Heat Reel.</strong> Film at a rooftop (nursery partner's or your own building). Hold a thermometer. Show 45–48°C. Cut to green, lush plants. Caption: "This is what we're building across Dhaka."</div></div>
+            <div class="task"><span class="task-channel ground">Ground</span><div class="task-text"><strong>Bashundhara & Uttara canvassing session.</strong> These are premium residential areas — your highest-value potential clients. Target luxury apartment buildings and villas with flat rooftops.</div></div>
+            <div class="task"><span class="task-channel crm">CRM</span><div class="task-text"><strong>Deliver any pending Mood Boards</strong> within 48hrs of each submission. Immediately update Airtable status. Set follow-up reminders for Day +3 if no response.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>10–11</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #5 — Process Explainer.</strong> "How it works in 4 steps" carousel. Use the exact funnel: Video → 48hr Design → Installation → Subscription. Clean, visual, simple. End: "Step 1 is free."</div></div>
+            <div class="task"><span class="task-channel ref">Ref</span><div class="task-text"><strong>Follow up on all Day 2 broadcast replies.</strong> Send personalised WhatsApp to anyone who showed interest but didn't send a video yet. Offer to send them the intake form directly.</div></div>
+            <div class="task"><span class="task-channel ground">Ground</span><div class="task-text"><strong>Visit building management companies.</strong> Search: "building management Dhaka" on Google. Call 5–10. Ask to speak to the property manager. Offer a demo design for one of their buildings for free (use it as your first case study).</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>12–13</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #6 — Plant Education Reel.</strong> "3 plants that survive Dhaka's heat perfectly." Show Areca Palm, Bamboo, Snake Plant from the nursery. Film at nursery — shows authenticity and that you have actual supply.</div></div>
+            <div class="task"><span class="task-channel wa">WA</span><div class="task-text"><strong>Send follow-up nudge</strong> to all leads in "Mood Board Sent" status who haven't replied in 72 hours. Use the soft script: "Hi [Name], just checking if you had a chance to look at your design! Happy to answer any questions 🌿"</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>14</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel all">All</span><div class="task-text"><strong>Week 2 Review.</strong> Count leads, mood boards sent, conversion rate so far. Which source is performing best: network, Instagram, canvassing? Double down on top performer in Week 3. Check all follow-ups are scheduled.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<hr class="div"/>
+
+<!-- ══════════════════════════════════════
+     WEEK 3
+══════════════════════════════════════ -->
+<section id="week3">
+<div class="page">
+  <div class="sh">
+    <span class="sh-num">Week 3</span>
+    <div>
+      <h2>Push for the<br/><em>First Deposit</em></h2>
+      <p>Days 15–21. Your warmest leads are in follow-up. Push for commitment. Offer the pilot discount. Close the first deal.</p>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header">
+      <span class="week-num">Week 3</span>
+      <div class="week-title">Close the First Client</div>
+      <div class="week-theme">Days 15–21 · Target: First deposit received</div>
+    </div>
+    <div class="week-days">
+      <div class="day-row">
+        <div class="day-label">Day<br/>15–16</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel wa">WA</span><div class="task-text"><strong>Personal call/voice note to your top 3 warm leads.</strong> Don't just text — send a WhatsApp voice note. "Hi [Name], I wanted to personally follow up on your rooftop design. I think the [Bundle Name] is a perfect fit for your space and I'd love to walk you through it."</div></div>
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #7 — Social Proof.</strong> "What your rooftop could look like." Show nursery partner's best plants arranged on a rooftop. Real plants, real setting. Caption: "We bring this to your doorstep in Dhaka."</div></div>
+            <div class="task"><span class="task-channel ground">Ground</span><div class="task-text"><strong>Follow up on all canvassing contacts</strong> from Weeks 1–2. Call or WhatsApp any darwans or managers who took your card. Ask: "Did the building owner have a chance to see our material?"</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>17–18</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ref">Ref</span><div class="task-text"><strong>Activate the pilot discount offer.</strong> WhatsApp to your 5 warmest contacts: "We're taking our first 3 Dhaka installations at a special founding-client rate. I thought of you first. Interested?" This creates urgency and rewards loyalty.</div></div>
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #8 — Subscription Value Reel.</strong> "Why your rooftop garden won't die." Explain the 3-visit annual care plan visually. Show pH meter, fertiliser, pruning. Key message: "We're not just installers. We're your permanent rooftop team."</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>19–21</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel wa">WA</span><div class="task-text"><strong>Send the deposit payment link</strong> to any lead who has verbally agreed. Make it frictionless: "To confirm your rooftop and lock in the founding-client rate, here's the deposit link: [link]. Takes 2 minutes." Follow up same day if not paid.</div></div>
+            <div class="task"><span class="task-channel all">All</span><div class="task-text"><strong>If no deposit yet:</strong> Don't panic. Go back to canvassing. Increase Instagram posting to daily. Text 10 more personal contacts. The close often takes 3–4 weeks for first-time buyers — keep the pipeline full.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<hr class="div"/>
+
+<!-- ══════════════════════════════════════
+     WEEK 4
+══════════════════════════════════════ -->
+<section id="week4">
+<div class="page">
+  <div class="sh">
+    <span class="sh-num">Week 4</span>
+    <div>
+      <h2>Install, Photograph,<br/><em>and Multiply</em></h2>
+      <p>Days 22–30. First install happens. Document everything. Turn one install into your next 5 leads.</p>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-header">
+      <span class="week-num">Week 4</span>
+      <div class="week-title">One Install → Five Leads</div>
+      <div class="week-theme">Days 22–30 · Target: Install complete + Instagram before/after live</div>
+    </div>
+    <div class="week-days">
+      <div class="day-row">
+        <div class="day-label">Day<br/>22–24</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel crm">CRM</span><div class="task-text"><strong>Coordinate first installation.</strong> Confirm nursery partner has all plants ready (check Fulfillment Orders table → partner_status = Ready). Confirm install date with client. Brief field team with 2D layout sketch.</div></div>
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post #9 — Behind the Scenes.</strong> Film the nursery partner's setup if possible. "This is where your plants come from." Show the quality of plants, the scale of the nursery. Massive trust-builder for Dhaka clients.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Install<br/>Day</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel all">All</span><div class="task-text"><strong>MANDATORY: Document everything.</strong> Film the before (empty roof), the installation process, and the finished garden. Photograph from every angle. This is your most valuable marketing asset. Do NOT skip this.</div></div>
+            <div class="task"><span class="task-channel crm">CRM</span><div class="task-text"><strong>Record soil pH baseline</strong> in subscription record. Update Airtable to "Active Subscriber". Collect final balance. Send subscription welcome packet to client.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="day-row">
+        <div class="day-label">Day<br/>27–30</div>
+        <div class="day-content">
+          <div class="day-tasks">
+            <div class="task"><span class="task-channel ig">IG</span><div class="task-text"><strong>Post the Before/After Reel.</strong> This is your most powerful content. Before: bare concrete, 48°C. After: lush garden, client smiling. Add the temperature data. This single reel should generate your next 5+ enquiries.</div></div>
+            <div class="task"><span class="task-channel ref">Ref</span><div class="task-text"><strong>Ask the client for a referral</strong> on install day or the day after: "If you know anyone with a rooftop in Dhaka, we'd love the introduction — and we'll take care of them just like we did you."</div></div>
+            <div class="task"><span class="task-channel all">All</span><div class="task-text"><strong>30-Day Review.</strong> Count total leads, mood boards sent, deposits received, installs completed. Identify your #1 lead source. Set Month 2 targets. You've built a real business in 30 days.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<hr class="div"/>
+
+<!-- ══════════════════════════════════════
+     INSTAGRAM CONTENT PLAN
+══════════════════════════════════════ -->
+<section id="instagram">
+<div class="page">
+  <div class="sh">
+    <span class="sh-num">IG</span>
+    <div>
+      <h2>Instagram Content<br/><em>30-Day Plan</em></h2>
+      <p>12 posts across 4 weeks. Every post has a strategic purpose. Reels outperform static posts — prioritise them.</p>
+    </div>
+  </div>
+
+  <div class="ig-grid">
+    <div class="ig-post">
+      <div class="ig-thumb green">🌿</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 1 · Post 1</div>
+        <div class="ig-caption">Brand intro reel. "Dhaka's heat has a solution." Show nursery plants. End with website link CTA.</div>
+        <span class="ig-format reel">Reel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb heat">🔥</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 1 · Post 2</div>
+        <div class="ig-caption">The 3 rooftop problems carousel. Hook: "Your Dhaka rooftop at 48°C". End: "We fix all three."</div>
+        <span class="ig-format carousel">Carousel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb green">🛋️🍋🌬️</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 1 · Post 3</div>
+        <div class="ig-caption">3 bundle types reveal. One slide each. Clean, visual. "Which one is your rooftop?"</div>
+        <span class="ig-format carousel">Carousel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb heat">🌡️</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 2 · Post 4</div>
+        <div class="ig-caption">Rooftop thermometer reel. Film at a real rooftop. Show 45–48°C. Cut to green plants. High impact.</div>
+        <span class="ig-format reel">Reel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb green">📱→🌿</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 2 · Post 5</div>
+        <div class="ig-caption">4-step process explainer. Video → Design → Install → Care. "Step 1 is free, always."</div>
+        <span class="ig-format carousel">Carousel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb green">🌴</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 2 · Post 6</div>
+        <div class="ig-caption">Plant education reel. "3 plants that survive Dhaka's heat." Film at nursery. Builds trust + supply confidence.</div>
+        <span class="ig-format reel">Reel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb green">✅</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 3 · Post 7</div>
+        <div class="ig-caption">Social proof — nursery plant showcase styled on a rooftop. "We bring this to your doorstep."</div>
+        <span class="ig-format single">Single</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb green">🔄</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 3 · Post 8</div>
+        <div class="ig-caption">Subscription care reel. "Why your garden won't die." Show pH meter, pruning, health report visual.</div>
+        <span class="ig-format reel">Reel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb amber">🌱</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 3 · Post 9</div>
+        <div class="ig-caption">Nursery behind-the-scenes. "This is where your plants come from." Film the nursery partner's setup.</div>
+        <span class="ig-format reel">Reel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb green">⭐</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 4 · Post 10</div>
+        <div class="ig-caption">First client testimonial (after install). Even a WhatsApp screenshot with permission. Raw = trust.</div>
+        <span class="ig-format single">Single</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb heat">→</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 4 · Post 11</div>
+        <div class="ig-caption">Installation day time-lapse or montage reel. Show the transformation happening in real time. Epic content.</div>
+        <span class="ig-format reel">Reel</span>
+      </div>
+    </div>
+    <div class="ig-post">
+      <div class="ig-thumb green">🌿✨</div>
+      <div class="ig-body">
+        <div class="ig-week">Week 4 · Post 12</div>
+        <div class="ig-caption">THE BEFORE/AFTER. Bare concrete → lush rooftop. This is your most viral post. Add temperature data. CTA: "Your rooftop is next."</div>
+        <span class="ig-format reel">Reel</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>Instagram Caption Formula for every post:</strong> Line 1 = Bold hook (the problem or surprise). Lines 2–4 = The solution / story / value. Line 5 = Clear CTA: "Free design — link in bio" or "WhatsApp us." Always add 5–10 hashtags: #DhakaRooftop #BangladeshGarden #GreenDhaka #RooftopGarden #DhakaLiving #UrbanGarden #BangladeshGreen #DhakaHome #RooftopOasis #GreenBuilding
+  </div>
+</div>
+</section>
+<hr class="div"/>
+
+<!-- ══════════════════════════════════════
+     OUTREACH SCRIPTS
+══════════════════════════════════════ -->
+<section id="outreach">
+<div class="page">
+  <div class="sh">
+    <span class="sh-num">Scripts</span>
+    <div>
+      <h2>Outreach Scripts —<br/><em>Copy & Send</em></h2>
+      <p>Ready-to-send messages for every channel. Personalise the name. Do not copy-paste to all contacts at once — send individually for warm leads.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="sc-header">
+      <div class="sc-icon">📲</div>
+      <div class="sc-title">Personal WhatsApp Broadcast — Network</div>
+      <span class="sc-channel task-channel wa">WhatsApp</span>
+    </div>
+    <div class="sc-body">
+      <div class="script-text">
+        "Assalamu Alaikum [Name] ভাই/আপু,<br/><br/>
+        আমি একটা নতুন উদ্যোগ শুরু করেছি — Urban Rooftop Oasis। আমরা ঢাকার বাড়ির ছাদকে সুন্দর সবুজ বাগানে রূপান্তর করি — design থেকে installation পর্যন্ত সব আমরা করি।<br/><br/>
+        ঢাকার গরমে ছাদের তাপমাত্রা ৪৮°C পর্যন্ত পৌঁছায়। আমাদের Climate Cooler package ৬°C পর্যন্ত কমাতে পারে।<br/><br/>
+        আপনার বা আপনার পরিচিত কারো ছাদ থাকলে আমরা ৪৮ ঘণ্টার মধ্যে একটা free 2D design পাঠাই।<br/><br/>
+        আমাদের website: [your github link]<br/><br/>
+        আপনি কি কাউকে refer করতে পারবেন? 🌿"
+      </div>
+      <div class="script-note"><strong>Why this works:</strong> It's in Bangla (personal), explains the problem (48°C), gives a specific benefit (−6°C), offers something free (48hr design), and ends with a referral ask — not a hard sell.</div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="sc-header">
+      <div class="sc-icon">🇬🇧</div>
+      <div class="sc-title">Personal WhatsApp — English Version</div>
+      <span class="sc-channel task-channel wa">WhatsApp</span>
+    </div>
+    <div class="sc-body">
+      <div class="script-text">
+        "Hi [Name], hope you're well!<br/><br/>
+        I've just launched Urban Rooftop Oasis — we transform empty Dhaka rooftops into premium green gardens. Design, installation, and expert maintenance — completely done for you.<br/><br/>
+        Dhaka rooftops hit 48°C in summer. Our Climate Cooler package brings that down by up to 6°C. The Aesthetic Lounge turns it into an outdoor living space. We also do Urban Orchards — fresh fruit and veg on your roof.<br/><br/>
+        If you own a building or know someone who does, we'll send a free personalised 2D design and quote within 48 hours, no obligation.<br/><br/>
+        Website: [your github link]<br/><br/>
+        Would love if you could share — or if you know anyone in Gulshan, Banani, Dhanmondi area who'd be interested 🌿"
+      </div>
+      <div class="script-note"><strong>Tip:</strong> Send as a voice note for your closest contacts — it converts significantly better than text.</div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="sc-header">
+      <div class="sc-icon">🏢</div>
+      <div class="sc-title">Building Darwan / Manager — On-Ground Script</div>
+      <span class="sc-channel ground">Ground</span>
+    </div>
+    <div class="sc-body">
+      <div class="script-text">
+        "ভাই, আমি Urban Rooftop Oasis থেকে এসেছি। আমরা ঢাকার building-এর ছাদে premium garden তৈরি করি। আপনাদের building-এর owner-কে কি একটু এই card দেওয়া যাবে? আমরা free design দিই — কোনো commitment লাগবে না। Owner যদি interested হন, আমার WhatsApp-এ contact করতে বলবেন।"<br/><br/>
+        [Hand over the printed A5 card with QR code]
+      </div>
+      <div class="script-note"><strong>Key principle:</strong> Never try to hard-sell the darwan. Your goal is only to get your card to the building owner. Keep it short, respectful, and leave the card. Follow up by calling back in 3–4 days.</div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="sc-header">
+      <div class="sc-icon">🏡</div>
+      <div class="sc-title">Real Estate Agent Partnership Pitch</div>
+      <span class="sc-channel ref">Referral</span>
+    </div>
+    <div class="sc-body">
+      <div class="script-text">
+        "Hi [Agent Name], I run Urban Rooftop Oasis — we turn Dhaka rooftops into premium gardens. I wanted to propose a referral partnership.<br/><br/>
+        Many of your property owner clients likely have unused rooftops. We transform them — and it increases property value by 10–15%. If you refer a client who installs with us, we'll pay you a referral commission of [X%] of the installation fee.<br/><br/>
+        No extra work for you — just a WhatsApp introduction. Would you be open to this?"
+      </div>
+      <div class="script-note"><strong>Commission suggestion:</strong> 5–8% of installation value. On a ৳1.5 lakh install, that's ৳7,500–12,000 for one referral. Very motivating for agents.</div>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="sc-header">
+      <div class="sc-icon">💰</div>
+      <div class="sc-title">Closing Message — Warm Lead Who Hasn't Deposited</div>
+      <span class="sc-channel wa">WhatsApp</span>
+    </div>
+    <div class="sc-body">
+      <div class="script-text">
+        "Hi [Name], just a quick note — we're taking our first 3 founding installations in Dhaka at a special rate this month. Since you've already seen your design, I wanted to give you first access before we open it up.<br/><br/>
+        Your rooftop could be transformed within [X] weeks from now. The deposit to confirm is just [amount] — fully credited to your total.<br/><br/>
+        Want me to send the payment link? 🌿"
+      </div>
+      <div class="script-note"><strong>Why this works:</strong> Creates genuine urgency (3 slots), acknowledges the existing relationship (they've seen the design), makes the deposit feel small and safe (credited to total). Never pressure — one message, then wait 3 days before one final follow-up.</div>
+    </div>
+  </div>
+
+</div>
+</section>
+<hr class="div"/>
+
+<!-- ══════════════════════════════════════
+     TARGETS
+══════════════════════════════════════ -->
+<section id="targets">
+<div class="page">
+  <div class="sh">
+    <span class="sh-num">Targets</span>
+    <div>
+      <h2>30-Day Targets &<br/><em>Month 2–3 Vision</em></h2>
+      <p>Realistic, lean targets for a zero-budget Dhaka launch. Measure weekly. Adjust by source performance.</p>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-box">
+      <div class="kpi-period">Week 1</div>
+      <div class="kpi-val">50+</div>
+      <div class="kpi-name">Personal messages sent</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Week 1</div>
+      <div class="kpi-val">3</div>
+      <div class="kpi-name">Instagram posts live</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Week 1–2</div>
+      <div class="kpi-val">5+</div>
+      <div class="kpi-name">Leads in Airtable</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Week 2</div>
+      <div class="kpi-val">3+</div>
+      <div class="kpi-name">Mood boards delivered</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Week 3</div>
+      <div class="kpi-val">1</div>
+      <div class="kpi-name">Deposit received</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Week 4</div>
+      <div class="kpi-val">1</div>
+      <div class="kpi-name">Install completed</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Week 4</div>
+      <div class="kpi-val">1</div>
+      <div class="kpi-name">Before/after reel live</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Month 2</div>
+      <div class="kpi-val">3</div>
+      <div class="kpi-name">Total installs done</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Month 3</div>
+      <div class="kpi-val">5</div>
+      <div class="kpi-name">Active subscribers</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-period">Month 3</div>
+      <div class="kpi-val">৳X</div>
+      <div class="kpi-name">First recurring MRR</div>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    <strong>The most important rule:</strong> Speed of response = trust in Dhaka's market. Any lead who submits a video and doesn't hear back in 24 hours is likely lost. Set a phone alarm for 9AM every morning: check Airtable for new leads, send any pending mood boards, follow up on any open conversations. Do this before anything else.
+  </div>
+
+  <div class="info-box">
+    <strong>Dhaka-specific advantage — the heat narrative:</strong> Every piece of content, every message, every conversation should anchor to the heat problem. "Dhaka's 48°C rooftop heat" is your hook. It's visceral, it's real, and every single building owner in the city feels it. This is your unfair marketing advantage. Use it relentlessly.
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <div class="f-brand">Urban Rooftop Oasis</div>
+  <div class="f-note">30-Day Dhaka Launch Plan · Confidential · Execute Daily</div>
+</footer>
+
+</body>
+</html>
