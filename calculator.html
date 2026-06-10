@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Urban Rooftop Oasis — Build your rooftop garden and get an instant price estimate. Choose your bundle, pick your plants, see your cost live."/>
+<title>Garden Calculator — Urban Rooftop Oasis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --void:#0a0d08;--deep:#111a0c;--bark:#1e2d14;--moss:#2d4a1a;
+  --leaf:#4a7a28;--sage:#7aad4a;--mist:#b8d494;--dew:#dff0c4;
+  --cream:#f5f0e4;--gold:#c8a03c;--amber:#e8b84b;--heat:#d4522a;--ink:#0d1208;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--cream);font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--sage);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+.cursor-ring{width:36px;height:36px;border:1px solid rgba(122,173,74,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s ease;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(10,13,8,0.97);border-bottom:1px solid rgba(122,173,74,0.1);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-icon{width:34px;height:34px;background:var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);line-height:1.1;}
+.nav-logo-text small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,228,0.5);text-decoration:none;padding:8px 12px;border-radius:6px;transition:all .2s;}
+.nav-links a:hover{color:var(--sage);background:rgba(122,173,74,0.07);}
+.nav-links a.active{color:var(--sage);}
+.nav-cta{background:var(--moss) !important;color:var(--cream) !important;border:1px solid rgba(122,173,74,0.3) !important;}
+.nav-cta:hover{background:var(--leaf) !important;}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.nav-toggle span{display:block;width:24px;height:1.5px;background:var(--cream);}
+.nav-drawer{position:fixed;inset:0;background:rgba(10,13,8,0.98);z-index:490;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;transform:translateX(100%);transition:transform .4s ease;}
+.nav-drawer.open{transform:translateX(0);}
+.nav-drawer a{font-family:'Playfair Display',serif;font-size:28px;color:var(--cream);text-decoration:none;}
+.nav-drawer a:hover{color:var(--sage);}
+.wa-float{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 6px 24px rgba(37,211,102,0.4);z-index:400;text-decoration:none;transition:transform .25s;}
+.wa-float:hover{transform:scale(1.1);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* PAGE HERO */
+.page-hero{padding:140px 8vw 60px;background:linear-gradient(160deg,var(--deep),var(--void));position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;bottom:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(122,173,74,0.07) 0%,transparent 70%);pointer-events:none;}
+.page-hero-inner{max-width:1100px;margin:0 auto;text-align:center;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,228,0.35);margin-bottom:24px;display:flex;align-items:center;gap:10px;justify-content:center;}
+.breadcrumb a{color:var(--sage);text-decoration:none;}
+.breadcrumb span{color:rgba(245,240,228,0.2);}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,5.5vw,72px);color:var(--cream);line-height:1.0;margin-bottom:18px;}
+.page-hero h1 em{font-style:italic;color:var(--sage);}
+.page-hero p{font-size:15px;color:rgba(245,240,228,0.55);line-height:1.75;max-width:520px;margin:0 auto;}
+
+/* MAIN LAYOUT */
+.calc-layout{display:grid;grid-template-columns:1fr 360px;gap:28px;max-width:1100px;margin:0 auto;padding:48px 8vw 100px;align-items:start;}
+
+/* LEFT: STEPS */
+.calc-steps{display:flex;flex-direction:column;gap:20px;}
+
+.step-card{background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.12);border-radius:14px;overflow:hidden;transition:border-color .3s;}
+.step-card.active{border-color:rgba(122,173,74,0.35);}
+.step-header{padding:20px 24px;display:flex;align-items:center;gap:16px;cursor:pointer;}
+.step-num-badge{width:32px;height:32px;border-radius:50%;background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.25);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--sage);flex-shrink:0;}
+.step-card.active .step-num-badge{background:var(--sage);color:var(--ink);}
+.step-card.done .step-num-badge{background:var(--moss);color:var(--cream);}
+.step-card.done .step-num-badge::after{content:'✓';}
+.step-title-text{font-family:'Playfair Display',serif;font-size:18px;color:var(--cream);}
+.step-subtitle{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(245,240,228,0.35);margin-top:2px;}
+.step-body{padding:0 24px 24px;}
+.step-body.hidden{display:none;}
+
+/* BUNDLE PICKER */
+.bundle-pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.bp-btn{background:rgba(255,255,255,0.03);border:2px solid rgba(122,173,74,0.12);border-radius:10px;padding:18px 12px;text-align:center;cursor:pointer;transition:all .25s;}
+.bp-btn:hover{border-color:rgba(122,173,74,0.4);background:rgba(122,173,74,0.06);}
+.bp-btn.selected{border-color:var(--sage);background:rgba(122,173,74,0.1);}
+.bp-btn-emoji{font-size:28px;margin-bottom:8px;}
+.bp-btn-name{font-family:'Playfair Display',serif;font-size:14px;color:var(--cream);margin-bottom:4px;line-height:1.2;}
+.bp-btn-tag{font-size:11px;color:rgba(245,240,228,0.38);}
+
+/* SIZE SLIDER */
+.size-row{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+.size-slider{flex:1;accent-color:var(--sage);height:6px;cursor:pointer;width:100%;}
+.size-display{background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.25);border-radius:8px;padding:10px 18px;text-align:center;min-width:90px;flex-shrink:0;}
+.size-display .val{font-family:'Playfair Display',serif;font-size:28px;color:var(--sage);line-height:1;}
+.size-display .unit{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,228,0.35);letter-spacing:1px;}
+.size-labels{display:flex;justify-content:space-between;}
+.size-labels span{font-family:'DM Mono',monospace;font-size:9px;color:rgba(245,240,228,0.25);}
+
+/* PLANT PICKER */
+.plant-cat-head{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(122,173,74,0.5);padding:10px 0 6px;border-bottom:1px solid rgba(122,173,74,0.08);margin-bottom:8px;margin-top:16px;}
+.plant-pick-grid{display:flex;flex-direction:column;gap:6px;}
+.plant-pick-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(122,173,74,0.07);border-radius:8px;padding:10px 14px;transition:border-color .2s;}
+.plant-pick-row:hover{border-color:rgba(122,173,74,0.2);}
+.pp-emoji{font-size:18px;flex-shrink:0;width:26px;text-align:center;}
+.pp-info{flex:1;min-width:0;}
+.pp-name{font-size:12px;font-weight:600;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pp-local{font-family:'DM Mono',monospace;font-size:9px;color:rgba(245,240,228,0.28);letter-spacing:.5px;}
+.pp-price{font-family:'DM Mono',monospace;font-size:10px;color:rgba(122,173,74,0.6);flex-shrink:0;margin-right:8px;}
+.qty-ctrl{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.qty-btn{width:26px;height:26px;background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.2);border-radius:6px;color:var(--sage);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:background .2s;flex-shrink:0;}
+.qty-btn:hover{background:rgba(122,173,74,0.25);}
+.qty-input{width:40px;text-align:center;background:rgba(122,173,74,0.07);border:1px solid rgba(122,173,74,0.18);border-radius:6px;padding:4px 2px;font-family:'DM Mono',monospace;font-size:12px;color:var(--cream);outline:none;}
+.qty-input:focus{border-color:rgba(122,173,74,0.5);}
+
+/* ADDONS */
+.addon-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.addon-item{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(122,173,74,0.08);border-radius:8px;padding:12px;cursor:pointer;transition:border-color .2s;}
+.addon-item:hover{border-color:rgba(122,173,74,0.25);}
+.addon-item input{accent-color:var(--sage);width:15px;height:15px;flex-shrink:0;margin-top:1px;cursor:pointer;}
+.addon-name{font-size:12px;font-weight:600;color:var(--cream);margin-bottom:2px;}
+.addon-price{font-family:'DM Mono',monospace;font-size:10px;color:var(--sage);}
+
+/* RIGHT: PRICE PANEL (sticky) */
+.price-panel{position:sticky;top:90px;background:rgba(30,45,20,0.5);border:1px solid rgba(122,173,74,0.2);border-radius:16px;overflow:hidden;backdrop-filter:blur(12px);}
+.pp-top{background:var(--moss);padding:24px;}
+.pp-top-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:8px;}
+.pp-bundle-tag{font-family:'Playfair Display',serif;font-size:16px;color:var(--cream);margin-bottom:16px;min-height:24px;}
+.pp-price-row{display:flex;align-items:baseline;gap:6px;}
+.pp-price-min{font-family:'Playfair Display',serif;font-size:38px;color:var(--cream);line-height:1;}
+.pp-price-sep{font-family:'Playfair Display',serif;font-size:22px;color:rgba(245,240,228,0.3);}
+.pp-price-max{font-family:'Playfair Display',serif;font-size:28px;color:rgba(245,240,228,0.6);line-height:1;}
+.pp-note{font-size:11px;color:rgba(245,240,228,0.4);margin-top:6px;line-height:1.5;}
+
+.pp-body{padding:20px;}
+.pp-breakdown{display:flex;flex-direction:column;gap:0;margin-bottom:16px;}
+.pb-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(122,173,74,0.07);font-size:12px;}
+.pb-row:last-child{border-bottom:none;}
+.pb-label{color:rgba(245,240,228,0.5);}
+.pb-val{font-family:'DM Mono',monospace;color:var(--cream);}
+.pb-row.total{padding-top:12px;border-top:1px solid rgba(122,173,74,0.2);margin-top:4px;border-bottom:none;}
+.pb-row.total .pb-label{color:var(--cream);font-weight:600;}
+.pb-row.total .pb-val{color:var(--sage);font-size:14px;}
+
+.pp-deposit{background:rgba(122,173,74,0.08);border:1px solid rgba(122,173,74,0.15);border-radius:8px;padding:12px 14px;margin-bottom:16px;}
+.ppd-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(122,173,74,0.6);margin-bottom:5px;}
+.ppd-amounts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ppd-item{text-align:center;}
+.ppd-item .amt{font-family:'Playfair Display',serif;font-size:18px;color:var(--sage);}
+.ppd-item .lbl{font-family:'DM Mono',monospace;font-size:9px;color:rgba(245,240,228,0.3);letter-spacing:1px;text-transform:uppercase;}
+
+.pp-actions{display:flex;flex-direction:column;gap:8px;}
+.btn-primary{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--sage);color:var(--ink);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:14px 20px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:all .25s;width:100%;}
+.btn-primary:hover{background:var(--leaf);color:var(--cream);transform:translateY(-1px);}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);color:#25D366;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:12px 16px;border-radius:8px;text-decoration:none;transition:all .25s;width:100%;cursor:pointer;}
+.btn-wa:hover{background:rgba(37,211,102,0.18);}
+.btn-reset{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1px solid rgba(245,240,228,0.1);color:rgba(245,240,228,0.35);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:10px 16px;border-radius:8px;text-decoration:none;transition:all .25s;width:100%;cursor:pointer;}
+.btn-reset:hover{border-color:rgba(245,240,228,0.25);color:rgba(245,240,228,0.6);}
+
+.pp-empty{text-align:center;padding:16px 0;}
+.pp-empty-icon{font-size:36px;margin-bottom:10px;}
+.pp-empty-text{font-size:13px;color:rgba(245,240,228,0.3);line-height:1.6;}
+
+/* MOBILE PRICE BAR */
+.mobile-price-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(30,45,20,0.97);border-top:1px solid rgba(122,173,74,0.2);padding:14px 20px;z-index:400;backdrop-filter:blur(12px);}
+.mpb-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.mpb-price{font-family:'Playfair Display',serif;font-size:22px;color:var(--sage);}
+.mpb-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(245,240,228,0.3);}
+.mpb-btn{background:var(--sage);color:var(--ink);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;padding:12px 20px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;white-space:nowrap;}
+
+/* FOOTER */
+footer{background:var(--void);border-top:1px solid rgba(122,173,74,0.1);padding:60px 8vw 32px;}
+.footer-bottom-simple{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(245,240,228,0.2);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(245,240,228,0.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--sage);}
+
+@media(max-width:1024px){
+  .calc-layout{grid-template-columns:1fr;}
+  .price-panel{position:static;}
+  .mobile-price-bar{display:block;}
+  body{padding-bottom:80px;}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+  .bundle-pick-grid{grid-template-columns:1fr;}
+  .addon-grid{grid-template-columns:1fr;}
+  .calc-layout{padding:32px 6vw 100px;}
+  body{cursor:auto;}
+  .cursor,.cursor-ring{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<a href="https://wa.me/8801859929858?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Urban%20Rooftop%20Oasis" class="wa-float" target="_blank">💬</a>
+
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html" onclick="closeDrawer()">Home</a>
+  <a href="gardens.html" onclick="closeDrawer()">Our Gardens</a>
+  <a href="calculator.html" onclick="closeDrawer()">Calculator</a>
+  <a href="maintenance.html" onclick="closeDrawer()">Care Plan</a>
+  <a href="contact.html" onclick="closeDrawer()">Contact</a>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">🌿</div>
+    <div class="nav-logo-text">Urban Rooftop Oasis<small>Dhaka · Bangladesh</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gardens.html">Our Gardens</a></li>
+    <li><a href="calculator.html" class="active">Calculator</a></li>
+    <li><a href="maintenance.html">Care Plan</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started →</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb reveal"><a href="index.html">Home</a><span>/</span>Calculator</div>
+    <h1 class="reveal">Build your garden.<br/><em>See the price instantly.</em></h1>
+    <p class="reveal">Choose your bundle, enter your roof size, pick your plants and add-ons. Your estimate updates live as you build.</p>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<div class="calc-layout">
+
+  <!-- LEFT: STEPS -->
+  <div class="calc-steps">
+
+    <!-- STEP 1: BUNDLE -->
+    <div class="step-card active" id="step1">
+      <div class="step-header" onclick="toggleStep('step1')">
+        <div class="step-num-badge" id="s1badge">1</div>
+        <div>
+          <div class="step-title-text">Choose your bundle</div>
+          <div class="step-subtitle" id="s1sub">Select the garden type that matches your goal</div>
+        </div>
+      </div>
+      <div class="step-body" id="s1body">
+        <div class="bundle-pick-grid">
+          <div class="bp-btn" onclick="selectBundle('lounge',this)">
+            <div class="bp-btn-emoji">🛋️</div>
+            <div class="bp-btn-name">Aesthetic Lounge</div>
+            <div class="bp-btn-tag">Beauty & relaxation</div>
+          </div>
+          <div class="bp-btn" onclick="selectBundle('orchard',this)">
+            <div class="bp-btn-emoji">🍋</div>
+            <div class="bp-btn-name">Urban Orchard</div>
+            <div class="bp-btn-tag">Fruits, veg & herbs</div>
+          </div>
+          <div class="bp-btn" onclick="selectBundle('cooler',this)">
+            <div class="bp-btn-emoji">🌬️</div>
+            <div class="bp-btn-name">Climate Cooler</div>
+            <div class="bp-btn-tag">Beat Dhaka's heat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: SIZE -->
+    <div class="step-card" id="step2">
+      <div class="step-header" onclick="toggleStep('step2')">
+        <div class="step-num-badge" id="s2badge">2</div>
+        <div>
+          <div class="step-title-text">Rooftop size</div>
+          <div class="step-subtitle" id="s2sub">Drag the slider to your approximate roof area</div>
+        </div>
+      </div>
+      <div class="step-body hidden" id="s2body">
+        <div class="size-row">
+          <input type="range" class="size-slider" id="roofSlider" min="20" max="200" value="50" step="5" oninput="onSizeChange(this.value)"/>
+          <div class="size-display">
+            <div class="val" id="sizeVal">50</div>
+            <div class="unit">m²</div>
+          </div>
+        </div>
+        <div class="size-labels"><span>20m² (small)</span><span>100m² (medium)</span><span>200m² (large)</span></div>
+        <p style="font-size:11px;color:rgba(245,240,228,0.3);margin-top:12px;line-height:1.6;">Not sure of the exact size? A rough estimate is fine — we confirm during the free site assessment.</p>
+      </div>
+    </div>
+
+    <!-- STEP 3: PLANTS -->
+    <div class="step-card" id="step3">
+      <div class="step-header" onclick="toggleStep('step3')">
+        <div class="step-num-badge" id="s3badge">3</div>
+        <div>
+          <div class="step-title-text">Pick your plants</div>
+          <div class="step-subtitle" id="s3sub">Quantities auto-suggest based on your roof size</div>
+        </div>
+      </div>
+      <div class="step-body hidden" id="s3body">
+        <div id="plantPickerArea">
+          <p style="color:rgba(245,240,228,0.3);font-size:13px;padding:12px 0;">← Select a bundle in Step 1 first</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: ADDONS -->
+    <div class="step-card" id="step4">
+      <div class="step-header" onclick="toggleStep('step4')">
+        <div class="step-num-badge" id="s4badge">4</div>
+        <div>
+          <div class="step-title-text">Add-ons</div>
+          <div class="step-subtitle">Optional upgrades for your rooftop</div>
+        </div>
+      </div>
+      <div class="step-body hidden" id="s4body">
+        <div class="addon-grid">
+          <label class="addon-item">
+            <input type="checkbox" data-price="10000" data-name="Drip Irrigation" onchange="calcPrice()"/>
+            <div><div class="addon-name">Drip Irrigation</div><div class="addon-price">+৳10,000</div></div>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" data-price="12000" data-name="Shade Sail" onchange="calcPrice()"/>
+            <div><div class="addon-name">Shade Sail</div><div class="addon-price">+৳12,000</div></div>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" data-price="8000" data-name="Solar LED Lighting" onchange="calcPrice()"/>
+            <div><div class="addon-name">Solar LED Lighting</div><div class="addon-price">+৳8,000</div></div>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" data-price="6000" data-name="Roof Membrane" onchange="calcPrice()"/>
+            <div><div class="addon-name">Roof Membrane</div><div class="addon-price">+৳6,000</div></div>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" data-price="18000" data-name="Year 1 Maintenance" onchange="calcPrice()"/>
+            <div><div class="addon-name">Year 1 Maintenance</div><div class="addon-price">+৳18,000</div></div>
+          </label>
+          <label class="addon-item">
+            <input type="checkbox" data-price="9000" data-name="Raised Bed Frames" onchange="calcPrice()"/>
+            <div><div class="addon-name">Raised Bed Frames</div><div class="addon-price">+৳9,000</div></div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /calc-steps -->
+
+  <!-- RIGHT: PRICE PANEL -->
+  <div class="price-panel reveal" id="pricePanel">
+
+    <div class="pp-top">
+      <div class="pp-top-label">Your Estimate</div>
+      <div class="pp-bundle-tag" id="ppBundleTag">Select a bundle to start</div>
+      <div class="pp-price-row">
+        <div class="pp-price-min" id="ppMin">৳—</div>
+        <div class="pp-price-sep">–</div>
+        <div class="pp-price-max" id="ppMax">৳—</div>
+      </div>
+      <div class="pp-note" id="ppNote">Choose your bundle and roof size to see your estimate</div>
+    </div>
+
+    <div class="pp-body">
+
+      <div id="ppEmpty" class="pp-empty">
+        <div class="pp-empty-icon">🌿</div>
+        <div class="pp-empty-text">Your garden estimate will appear here as you make selections above.</div>
+      </div>
+
+      <div id="ppBreakdownWrap" style="display:none;">
+        <div class="pp-breakdown" id="ppBreakdown"></div>
+
+        <div class="pp-deposit" id="ppDeposit">
+          <div class="ppd-label">Payment Structure</div>
+          <div class="ppd-amounts">
+            <div class="ppd-item">
+              <div class="amt" id="ppDepositAmt">৳—</div>
+              <div class="lbl">50% on confirm</div>
+            </div>
+            <div class="ppd-item">
+              <div class="amt" id="ppBalanceAmt">৳—</div>
+              <div class="lbl">50% on complete</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pp-actions">
+          <a href="contact.html" class="btn-primary">Get Free 2D Design →</a>
+          <button class="btn-wa" id="waBtn" onclick="sendWhatsApp()">💬 WhatsApp This Quote</button>
+          <button class="btn-reset" onclick="resetCalc()">↺ Start Over</button>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /price-panel -->
+
+</div><!-- /calc-layout -->
+
+<!-- MOBILE PRICE BAR -->
+<div class="mobile-price-bar" id="mobilePriceBar">
+  <div class="mpb-inner">
+    <div>
+      <div class="mpb-price" id="mpbPrice">৳—</div>
+      <div class="mpb-label">Estimated total</div>
+    </div>
+    <a href="contact.html" class="mpb-btn">Get Free Design →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom-simple">
+    <div class="footer-copy">© 2025 Urban Rooftop Oasis · Dhaka, Bangladesh · +880 1859-929858</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="gardens.html">Gardens</a>
+      <a href="maintenance.html">Care Plan</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── DATA ──
+const PLANTS = {
+  lounge:[
+    {cat:'Statement',emoji:'🌴',name:'Areca Palm (3–4ft)',local:'আরেকা পাম',price:1500,base:4},
+    {cat:'Statement',emoji:'🌿',name:'Dracaena Marginata',local:'ড্রাসেনা',price:600,base:3},
+    {cat:'Statement',emoji:'🍃',name:'Fiddle Leaf Fig',local:'ফিডল লিফ ফিগ',price:1200,base:2},
+    {cat:'Filler',emoji:'🪴',name:'Snake Plant',local:'শাপলা পাতা',price:300,base:6},
+    {cat:'Filler',emoji:'🌾',name:'Ornamental Grass',local:'সৌন্দর্য ঘাস',price:400,base:4},
+    {cat:'Filler',emoji:'🌱',name:'ZZ Plant',local:'জেডজেড প্ল্যান্ট',price:500,base:4},
+    {cat:'Filler',emoji:'🪨',name:'Jade Plant',local:'জেড গাছ',price:250,base:4},
+    {cat:'Trailing',emoji:'🍀',name:'Pothos / Money Plant',local:'মানি প্ল্যান্ট',price:150,base:8},
+    {cat:'Trailing',emoji:'💚',name:'Creeping Jenny',local:'ক্রিপিং জেনি',price:200,base:4},
+    {cat:'Accent',emoji:'🌸',name:'Seasonal Flowers',local:'মৌসুমী ফুল',price:200,base:6},
+  ],
+  orchard:[
+    {cat:'Fruit Trees',emoji:'🍋',name:'Dwarf Lemon (Thai)',local:'থাই লেবু',price:1200,base:2},
+    {cat:'Fruit Trees',emoji:'🟢',name:'Dwarf Guava (Thai)',local:'থাই পেয়ারা',price:1000,base:2},
+    {cat:'Fruit Trees',emoji:'🥭',name:'Dwarf Mango',local:'বারি আম',price:1500,base:1},
+    {cat:'Vegetables',emoji:'🍅',name:'Tomato (hybrid)',local:'টমেটো',price:80,base:8},
+    {cat:'Vegetables',emoji:'🌶️',name:'Chilli / Capsicum',local:'মরিচ গাছ',price:80,base:6},
+    {cat:'Vegetables',emoji:'🍆',name:'Eggplant (Brinjal)',local:'বেগুন',price:80,base:4},
+    {cat:'Vegetables',emoji:'🎋',name:'Bitter Gourd',local:'করলা',price:80,base:3},
+    {cat:'Herbs',emoji:'🌿',name:'Basil',local:'তুলসী / বেসিল',price:100,base:4},
+    {cat:'Herbs',emoji:'🍃',name:'Mint (Pudina)',local:'পুদিনা',price:100,base:4},
+    {cat:'Herbs',emoji:'🌱',name:'Coriander (Dhone)',local:'ধনেপাতা',price:100,base:4},
+    {cat:'Herbs',emoji:'🎋',name:'Lemongrass',local:'লেমনগ্রাস',price:150,base:3},
+    {cat:'Greens',emoji:'🥬',name:'Spinach (Palak)',local:'পালং শাক',price:100,base:6},
+    {cat:'Greens',emoji:'🔴',name:'Red Amaranth (Lal Shak)',local:'লাল শাক',price:80,base:6},
+    {cat:'Companion',emoji:'🌼',name:'Marigold',local:'গাঁদা ফুল',price:80,base:6},
+  ],
+  cooler:[
+    {cat:'Canopy',emoji:'🌴',name:'Areca Palm (5–6ft)',local:'আরেকা পাম (বড়)',price:2500,base:6},
+    {cat:'Canopy',emoji:'🎋',name:'Bamboo (clumping)',local:'বাঁশ (গুচ্ছ)',price:1200,base:4},
+    {cat:'Canopy',emoji:'🌳',name:'Ficus Benjamina',local:'ফাইকাস',price:1000,base:3},
+    {cat:'Mid Layer',emoji:'🍃',name:'Aralia (large leaf)',local:'আরালিয়া',price:800,base:4},
+    {cat:'Mid Layer',emoji:'🌿',name:'Peace Lily',local:'পিস লিলি',price:500,base:5},
+    {cat:'Mid Layer',emoji:'🌱',name:'Philodendron',local:'ফিলোডেন্ড্রন',price:700,base:4},
+    {cat:'Mid Layer',emoji:'🪴',name:'Rubber Plant',local:'রাবার গাছ',price:900,base:3},
+    {cat:'Ground',emoji:'🗡️',name:'Snake Plant (large)',local:'শাপলা পাতা (বড়)',price:400,base:8},
+    {cat:'Ground',emoji:'🌾',name:'Liriope / Mondo Grass',local:'লিরিওপে',price:200,base:10},
+    {cat:'Ground',emoji:'🍀',name:'Aglaonema',local:'চাইনিজ এভারগ্রিন',price:600,base:6},
+    {cat:'Edge',emoji:'💚',name:'Creeping Jenny',local:'ক্রিপিং জেনি',price:150,base:6},
+    {cat:'Edge',emoji:'🍀',name:'Pothos (trailing)',local:'মানি প্ল্যান্ট',price:150,base:6},
+  ]
+};
+
+const BASE_INSTALL = {lounge:35000,orchard:38000,cooler:42000};
+const BUNDLE_NAMES = {lounge:'🛋️ Aesthetic Lounge',orchard:'🍋 Urban Orchard',cooler:'🌬️ Climate Cooler'};
+const STD_SIZE = 50;
+
+let state = {bundle:null, size:50, plantQtys:{}, addons:{}};
+
+// ── BUNDLE SELECT ──
+function selectBundle(bundle, el){
+  state.bundle = bundle;
+  state.plantQtys = {};
+  document.querySelectorAll('.bp-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('s1sub').textContent = BUNDLE_NAMES[bundle];
+  document.getElementById('s1badge').textContent = '✓';
+  document.getElementById('step1').classList.add('done');
+  renderPlants();
+  openStep('step2');
+  calcPrice();
+}
+
+// ── SIZE ──
+function onSizeChange(val){
+  state.size = parseInt(val);
+  document.getElementById('sizeVal').textContent = val;
+  document.getElementById('s2sub').textContent = val + ' m² selected';
+  renderPlants();
+  calcPrice();
+}
+
+// ── RENDER PLANTS ──
+function renderPlants(){
+  if(!state.bundle) return;
+  const area = document.getElementById('plantPickerArea');
+  const plants = PLANTS[state.bundle];
+  const mult = Math.max(0.5, state.size / STD_SIZE);
+  const cats = [...new Set(plants.map(p=>p.cat))];
+  let html = '';
+  cats.forEach(cat=>{
+    html += `<div class="plant-cat-head">${cat}</div><div class="plant-pick-grid">`;
+    plants.filter(p=>p.cat===cat).forEach((p,i)=>{
+      const id = `qty_${state.bundle}_${cat}_${i}`.replace(/\s/g,'_');
+      const suggested = state.plantQtys[id] !== undefined ? state.plantQtys[id] : Math.max(1, Math.round(p.base * mult));
+      if(state.plantQtys[id] === undefined) state.plantQtys[id] = suggested;
+      html += `
+        <div class="plant-pick-row">
+          <div class="pp-emoji">${p.emoji}</div>
+          <div class="pp-info">
+            <div class="pp-name">${p.name}</div>
+            <div class="pp-local">${p.local}</div>
+          </div>
+          <div class="pp-price">৳${p.price.toLocaleString()}/unit</div>
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="changeQty('${id}',-1,${p.price})">−</button>
+            <input class="qty-input" type="number" id="${id}" value="${suggested}" min="0" max="99"
+              data-price="${p.price}" data-name="${p.name}"
+              onchange="state.plantQtys['${id}']=parseInt(this.value)||0;calcPrice()"/>
+            <button class="qty-btn" onclick="changeQty('${id}',1,${p.price})">+</button>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  });
+  area.innerHTML = html;
+  calcPrice();
+}
+
+function changeQty(id, delta, price){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const newVal = Math.max(0, Math.min(99, (parseInt(el.value)||0) + delta));
+  el.value = newVal;
+  state.plantQtys[id] = newVal;
+  calcPrice();
+}
+
+// ── STEP CONTROLS ──
+function openStep(id){
+  document.getElementById(id).classList.add('active');
+  document.getElementById(id.replace('step','s')+'body').classList.remove('hidden');
+}
+function toggleStep(id){
+  const body = document.getElementById(id.replace('step','s')+'body');
+  body.classList.toggle('hidden');
+}
+
+// ── CALCULATE ──
+function calcPrice(){
+  if(!state.bundle){
+    document.getElementById('ppEmpty').style.display='block';
+    document.getElementById('ppBreakdownWrap').style.display='none';
+    return;
+  }
+
+  // Open remaining steps once bundle is chosen
+  ['step2','step3','step4'].forEach(s=>{
+    document.getElementById(s).classList.add('active');
+    document.getElementById(s.replace('step','s')+'body').classList.remove('hidden');
+  });
+
+  // Plant total
+  let plantTotal = 0;
+  document.querySelectorAll('#plantPickerArea .qty-input').forEach(inp=>{
+    plantTotal += (parseInt(inp.value)||0) * parseInt(inp.dataset.price||0);
+  });
+
+  // Install base scaled by area
+  const scale = Math.max(0.6, state.size / STD_SIZE);
+  const installBase = Math.round(BASE_INSTALL[state.bundle] * scale);
+
+  // Addons
+  let addonTotal = 0; let addonLines = [];
+  document.querySelectorAll('.addon-item input:checked').forEach(cb=>{
+    const p = parseInt(cb.dataset.price||0);
+    addonTotal += p;
+    addonLines.push({name:cb.dataset.name, val:p});
+  });
+
+  const totalMin = plantTotal + installBase + addonTotal;
+  const totalMax = Math.round(totalMin * 1.2);
+  const deposit = Math.round(totalMin * 0.5);
+  const balance = totalMin - deposit;
+
+  // Update panel top
+  document.getElementById('ppBundleTag').textContent = BUNDLE_NAMES[state.bundle];
+  document.getElementById('ppMin').textContent = '৳' + totalMin.toLocaleString('en-IN');
+  document.getElementById('ppMax').textContent = '৳' + totalMax.toLocaleString('en-IN');
+  document.getElementById('ppNote').textContent = `For ~${state.size}m² · Includes plants, soil, pots & labour`;
+
+  // Breakdown
+  let bdHtml = `
+    <div class="pb-row"><span class="pb-label">Installation (soil, pots, labour)</span><span class="pb-val">৳${installBase.toLocaleString('en-IN')}</span></div>
+    <div class="pb-row"><span class="pb-label">Plants selected</span><span class="pb-val">৳${plantTotal.toLocaleString('en-IN')}</span></div>`;
+  if(addonLines.length){
+    addonLines.forEach(a=>{
+      bdHtml += `<div class="pb-row"><span class="pb-label">${a.name}</span><span class="pb-val">৳${a.val.toLocaleString('en-IN')}</span></div>`;
+    });
+  }
+  bdHtml += `<div class="pb-row total"><span class="pb-label">Total estimate</span><span class="pb-val">৳${totalMin.toLocaleString('en-IN')} – ৳${totalMax.toLocaleString('en-IN')}</span></div>`;
+  document.getElementById('ppBreakdown').innerHTML = bdHtml;
+
+  // Deposit
+  document.getElementById('ppDepositAmt').textContent = '৳'+deposit.toLocaleString('en-IN');
+  document.getElementById('ppBalanceAmt').textContent = '৳'+balance.toLocaleString('en-IN');
+
+  // Mobile bar
+  document.getElementById('mpbPrice').textContent = '৳'+totalMin.toLocaleString('en-IN')+'+';
+
+  document.getElementById('ppEmpty').style.display='none';
+  document.getElementById('ppBreakdownWrap').style.display='block';
+}
+
+// ── WHATSAPP ──
+function sendWhatsApp(){
+  const min = document.getElementById('ppMin').textContent;
+  const max = document.getElementById('ppMax').textContent;
+  const bundle = state.bundle ? BUNDLE_NAMES[state.bundle] : 'Not selected';
+  const msg = encodeURIComponent(
+    `Hi, I used the garden calculator on your website.\n\nBundle: ${bundle}\nRoof size: ~${state.size}m²\nEstimate: ${min} – ${max}\n\nCan you send me a proper quote and free 2D design?`
+  );
+  window.open(`https://wa.me/8801859929858?text=${msg}`,'_blank');
+}
+
+// ── RESET ──
+function resetCalc(){
+  state = {bundle:null,size:50,plantQtys:{},addons:{}};
+  document.querySelectorAll('.bp-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('roofSlider').value = 50;
+  document.getElementById('sizeVal').textContent = '50';
+  document.getElementById('plantPickerArea').innerHTML = '<p style="color:rgba(245,240,228,0.3);font-size:13px;padding:12px 0;">← Select a bundle in Step 1 first</p>';
+  document.querySelectorAll('.addon-item input').forEach(cb=>cb.checked=false);
+  document.getElementById('ppBundleTag').textContent = 'Select a bundle to start';
+  document.getElementById('ppMin').textContent = '৳—';
+  document.getElementById('ppMax').textContent = '৳—';
+  document.getElementById('ppNote').textContent = 'Choose your bundle and roof size to see your estimate';
+  document.getElementById('ppEmpty').style.display='block';
+  document.getElementById('ppBreakdownWrap').style.display='none';
+  document.getElementById('mpbPrice').textContent = '৳—';
+  ['step2','step3','step4'].forEach(s=>{
+    document.getElementById(s).classList.remove('active','done');
+    document.getElementById(s.replace('step','s')+'body').classList.add('hidden');
+  });
+  document.getElementById('s1badge').textContent='1';
+  document.getElementById('step1').classList.remove('done');
+  document.getElementById('s1sub').textContent='Select the garden type that matches your goal';
+}
+
+// ── CURSOR ──
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button,.bp-btn,.addon-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.borderColor='rgba(122,173,74,0.7)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(122,173,74,0.4)';});
+});
+
+// ── NAV ──
+document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navDrawer').classList.toggle('open'));
+function closeDrawer(){document.getElementById('navDrawer').classList.remove('open');}
+
+// ── REVEAL ──
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
