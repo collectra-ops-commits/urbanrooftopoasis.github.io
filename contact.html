@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Urban Rooftop Oasis — Get your free rooftop garden design in 48 hours. Serving Gulshan, Banani and Bashundhara, Dhaka."/>
+<title>Get Started — Urban Rooftop Oasis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --void:#0a0d08;--deep:#111a0c;--bark:#1e2d14;--moss:#2d4a1a;
+  --leaf:#4a7a28;--sage:#7aad4a;--mist:#b8d494;--dew:#dff0c4;
+  --cream:#f5f0e4;--gold:#c8a03c;--amber:#e8b84b;--heat:#d4522a;--ink:#0d1208;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--cream);font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--sage);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+.cursor-ring{width:36px;height:36px;border:1px solid rgba(122,173,74,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s ease;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(10,13,8,0.97);border-bottom:1px solid rgba(122,173,74,0.1);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-icon{width:34px;height:34px;background:var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);line-height:1.1;}
+.nav-logo-text small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,228,0.5);text-decoration:none;padding:8px 12px;border-radius:6px;transition:all .2s;}
+.nav-links a:hover{color:var(--sage);background:rgba(122,173,74,0.07);}
+.nav-links a.active{color:var(--sage);}
+.nav-cta{background:var(--moss) !important;color:var(--cream) !important;border:1px solid rgba(122,173,74,0.3) !important;}
+.nav-cta:hover{background:var(--leaf) !important;}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.nav-toggle span{display:block;width:24px;height:1.5px;background:var(--cream);}
+.nav-drawer{position:fixed;inset:0;background:rgba(10,13,8,0.98);z-index:490;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;transform:translateX(100%);transition:transform .4s ease;}
+.nav-drawer.open{transform:translateX(0);}
+.nav-drawer a{font-family:'Playfair Display',serif;font-size:28px;color:var(--cream);text-decoration:none;}
+.nav-drawer a:hover{color:var(--sage);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* PAGE HERO */
+.page-hero{padding:120px 8vw 60px;background:linear-gradient(160deg,var(--bark),var(--deep));position:relative;overflow:hidden;text-align:center;}
+.page-hero::before{content:'';position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(122,173,74,0.1) 0%,transparent 70%);pointer-events:none;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,228,0.35);margin-bottom:24px;display:flex;align-items:center;gap:10px;justify-content:center;}
+.breadcrumb a{color:var(--sage);text-decoration:none;}
+.breadcrumb span{color:rgba(245,240,228,0.2);}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.2);border-radius:20px;padding:6px 16px;margin-bottom:24px;}
+.eyebrow-dot{width:6px;height:6px;background:var(--amber);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,184,75,0.4);}50%{box-shadow:0 0 0 8px rgba(232,184,75,0);}}
+.eyebrow-text{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(38px,5.5vw,72px);color:var(--cream);line-height:1.05;margin-bottom:18px;}
+.hero-title em{font-style:italic;color:var(--sage);}
+.hero-desc{font-size:15px;color:rgba(245,240,228,0.55);line-height:1.75;max-width:520px;margin:0 auto 36px;}
+.hero-steps{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.hero-step{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(122,173,74,0.15);border-radius:8px;padding:10px 16px;}
+.hs-num{width:22px;height:22px;background:var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--cream);flex-shrink:0;}
+.hs-text{font-size:12px;color:rgba(245,240,228,0.65);}
+
+/* MAIN LAYOUT */
+.main-layout{display:grid;grid-template-columns:1fr 380px;gap:32px;max-width:1200px;margin:0 auto;padding:56px 8vw 80px;align-items:start;}
+
+/* FORM */
+.form-card{background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.15);border-radius:16px;overflow:hidden;}
+.form-card-header{background:var(--moss);padding:24px 32px;position:relative;overflow:hidden;}
+.form-card-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 100%,rgba(74,122,40,0.5) 0%,transparent 70%);}
+.fch-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);margin-bottom:6px;position:relative;}
+.fch-sub{font-size:13px;color:rgba(245,240,228,0.65);position:relative;}
+.fch-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px;margin-top:12px;position:relative;}
+.fch-badge span{font-family:'DM Mono',monospace;font-size:10px;color:var(--dew);letter-spacing:1px;}
+.form-body{padding:32px;}
+
+/* FORM FIELDS */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.form-row.full{grid-template-columns:1fr;}
+.fg{display:flex;flex-direction:column;gap:7px;}
+.fg label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(122,173,74,0.8);}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(122,173,74,0.18);border-radius:8px;padding:13px 15px;font-family:'Syne',sans-serif;font-size:13px;color:var(--cream);outline:none;transition:border-color .25s,background .25s;width:100%;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(122,173,74,0.55);background:rgba(122,173,74,0.06);}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(245,240,228,0.2);}
+.fg select option{background:var(--deep);color:var(--cream);}
+.fg textarea{resize:vertical;min-height:90px;}
+.fg select{-webkit-appearance:none;appearance:none;cursor:pointer;}
+
+/* RADIO OPTIONS */
+.radio-group{display:flex;gap:8px;flex-wrap:wrap;}
+.radio-opt{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.14);border-radius:8px;padding:9px 14px;cursor:pointer;font-size:12px;color:rgba(245,240,228,0.6);transition:all .2s;flex:1;min-width:120px;}
+.radio-opt:hover{border-color:rgba(122,173,74,0.35);color:var(--cream);}
+.radio-opt.selected{border-color:var(--sage);background:rgba(122,173,74,0.1);color:var(--cream);}
+.radio-opt input{display:none;}
+.rdot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--sage);flex-shrink:0;transition:.2s;}
+.radio-opt.selected .rdot{background:var(--sage);}
+
+/* UPLOAD */
+.upload-zone{border:2px dashed rgba(122,173,74,0.22);border-radius:10px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .25s;position:relative;}
+.upload-zone:hover{border-color:rgba(122,173,74,0.5);background:rgba(122,173,74,0.04);}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.uz-icon{font-size:28px;margin-bottom:8px;}
+.uz-text{font-size:13px;color:rgba(245,240,228,0.5);line-height:1.5;}
+.uz-text strong{color:var(--sage);}
+.uz-hint{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,228,0.25);margin-top:5px;letter-spacing:.5px;}
+
+/* SUBMIT ROW */
+.submit-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:24px;flex-wrap:wrap;}
+.submit-note{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.5px;color:rgba(245,240,228,0.28);line-height:1.65;flex:1;min-width:180px;}
+.submit-note strong{color:rgba(122,173,74,0.6);}
+.btn-submit{display:inline-flex;align-items:center;gap:10px;background:var(--sage);color:var(--ink);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:16px 32px;border-radius:8px;border:none;cursor:pointer;transition:all .25s;white-space:nowrap;}
+.btn-submit:hover{background:var(--leaf);color:var(--cream);transform:translateY(-2px);box-shadow:0 12px 36px rgba(74,122,40,0.4);}
+.btn-submit .arr{transition:transform .25s;}
+.btn-submit:hover .arr{transform:translateX(4px);}
+
+/* SUCCESS */
+.success-state{display:none;padding:48px 32px;text-align:center;}
+.success-state.show{display:block;}
+.success-icon{font-size:56px;margin-bottom:16px;}
+.success-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--sage);margin-bottom:12px;}
+.success-desc{font-size:14px;color:rgba(245,240,228,0.6);line-height:1.75;margin-bottom:28px;}
+.success-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:14px 26px;border-radius:8px;text-decoration:none;transition:all .25s;}
+.success-wa:hover{background:#1da851;transform:translateY(-2px);}
+
+/* RIGHT SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:20px;}
+
+/* CONTACT CARD */
+.contact-card{background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.12);border-radius:14px;padding:24px;}
+.cc-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--cream);margin-bottom:18px;}
+.cc-item{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid rgba(122,173,74,0.07);}
+.cc-item:last-child{border-bottom:none;}
+.cc-icon{width:36px;height:36px;background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.cc-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(122,173,74,0.6);margin-bottom:4px;}
+.cc-value{font-size:13px;color:var(--cream);line-height:1.4;}
+.cc-value a{color:var(--sage);text-decoration:none;}
+.cc-value a:hover{text-decoration:underline;}
+
+/* AREAS CARD */
+.areas-card{background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.12);border-radius:14px;overflow:hidden;}
+.ac-header{background:var(--bark);padding:16px 20px;}
+.ac-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:4px;}
+.ac-sub{font-size:12px;color:rgba(245,240,228,0.45);}
+.ac-body{padding:16px 20px;}
+.area-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.2);color:var(--sage);font-size:12px;padding:6px 12px;border-radius:20px;margin:4px 4px 4px 0;}
+.area-pill::before{content:'📍';font-size:11px;}
+.coming-soon{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(245,240,228,0.3);margin-top:12px;padding-top:12px;border-top:1px solid rgba(122,173,74,0.08);}
+
+/* HOURS CARD */
+.hours-card{background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.12);border-radius:14px;padding:20px;}
+.hours-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:14px;}
+.hours-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(122,173,74,0.06);font-size:12px;}
+.hours-row:last-child{border-bottom:none;}
+.hours-day{color:rgba(245,240,228,0.55);}
+.hours-time{font-family:'DM Mono',monospace;color:var(--sage);font-size:11px;}
+.hours-time.closed{color:rgba(245,240,228,0.25);}
+
+/* MAP */
+.map-section{padding:0 8vw 80px;max-width:1200px;margin:0 auto;}
+.map-header{margin-bottom:24px;}
+.map-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.map-label::before{content:'';width:24px;height:1px;background:var(--sage);}
+.map-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,42px);color:var(--cream);}
+.map-title em{font-style:italic;color:var(--sage);}
+.map-wrap{border-radius:16px;overflow:hidden;border:1px solid rgba(122,173,74,0.15);height:420px;position:relative;}
+.map-wrap iframe{width:100%;height:100%;border:none;filter:invert(90%) hue-rotate(140deg) saturate(0.7) brightness(0.85);}
+.map-overlay-pills{position:absolute;bottom:16px;left:16px;display:flex;gap:8px;flex-wrap:wrap;z-index:2;}
+.map-pill{background:rgba(10,13,8,0.92);border:1px solid rgba(122,173,74,0.3);color:var(--sage);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:6px 12px;border-radius:20px;backdrop-filter:blur(8px);}
+
+/* FAQ */
+.faq-section{padding:0 8vw 80px;max-width:1200px;margin:0 auto;}
+.faq-header{margin-bottom:32px;}
+.faq-list{border:1px solid rgba(122,173,74,0.12);border-radius:12px;overflow:hidden;}
+.faq-item{border-bottom:1px solid rgba(122,173,74,0.08);}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;cursor:pointer;transition:background .2s;}
+.faq-q:hover{background:rgba(122,173,74,0.04);}
+.faq-q-text{font-size:13px;font-weight:600;color:var(--cream);padding-right:16px;}
+.faq-icon{width:22px;height:22px;background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sage);font-size:15px;flex-shrink:0;transition:transform .3s;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{display:none;padding:0 24px 18px;font-size:13px;color:rgba(245,240,228,0.58);line-height:1.75;}
+.faq-item.open .faq-a{display:block;}
+
+/* WHATSAPP WIDGET */
+.wa-widget{position:fixed;bottom:28px;right:28px;z-index:400;}
+.wa-bubble{width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 6px 24px rgba(37,211,102,0.4);cursor:pointer;transition:transform .25s,box-shadow .25s;position:relative;}
+.wa-bubble:hover{transform:scale(1.1) translateY(-2px);box-shadow:0 12px 36px rgba(37,211,102,0.5);}
+.wa-badge{position:absolute;top:-3px;right:-3px;width:14px;height:14px;background:var(--heat);border-radius:50%;border:2px solid var(--void);animation:waggle 2s ease-in-out infinite;}
+@keyframes waggle{0%,100%{transform:scale(1);}50%{transform:scale(1.3);}}
+.wa-panel{position:absolute;bottom:70px;right:0;width:300px;background:rgba(17,26,12,0.98);border:1px solid rgba(122,173,74,0.2);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform:scale(0.9) translateY(10px);opacity:0;pointer-events:none;transition:all .3s ease;transform-origin:bottom right;}
+.wa-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all;}
+.wap-header{background:var(--moss);padding:16px 18px;display:flex;align-items:center;gap:12px;}
+.wap-avatar{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.wap-name{font-size:14px;font-weight:600;color:var(--cream);}
+.wap-status{font-family:'DM Mono',monospace;font-size:10px;color:var(--mist);display:flex;align-items:center;gap:5px;}
+.wap-status-dot{width:5px;height:5px;background:var(--dew);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.wap-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.6);font-size:20px;cursor:pointer;line-height:1;padding:2px;}
+.wap-body{padding:16px;}
+.wap-msg{background:rgba(255,255,255,0.05);border-radius:10px;padding:12px 14px;font-size:13px;color:rgba(245,240,228,0.75);line-height:1.6;margin-bottom:12px;}
+.wap-options{display:flex;flex-direction:column;gap:7px;}
+.wap-opt{display:block;background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.22);color:var(--sage);font-size:12px;padding:10px 14px;border-radius:8px;text-decoration:none;transition:all .2s;text-align:left;cursor:pointer;font-family:'Syne',sans-serif;}
+.wap-opt:hover{background:rgba(122,173,74,0.2);color:var(--cream);}
+.wap-footer{padding:12px 16px;border-top:1px solid rgba(122,173,74,0.08);}
+.wap-input-row{display:flex;gap:8px;}
+.wap-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(122,173,74,0.15);border-radius:20px;padding:8px 14px;font-family:'Syne',sans-serif;font-size:12px;color:var(--cream);outline:none;}
+.wap-input::placeholder{color:rgba(245,240,228,0.25);}
+.wap-send{width:34px;height:34px;background:var(--sage);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;flex-shrink:0;transition:background .2s;}
+.wap-send:hover{background:var(--leaf);}
+
+/* FOOTER */
+footer{background:var(--void);border-top:1px solid rgba(122,173,74,0.1);padding:72px 8vw 36px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;max-width:1200px;margin:0 auto 56px;}
+.footer-brand-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.fbl-icon{width:40px;height:40px;background:var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;}
+.fbl-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--cream);line-height:1.1;}
+.fbl-name small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-style:normal;}
+.footer-desc{font-size:13px;color:rgba(245,240,228,0.38);line-height:1.7;margin-bottom:20px;}
+.footer-contact{font-size:12px;color:rgba(245,240,228,0.4);margin-bottom:8px;}
+.footer-col-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:18px;}
+.footer-col-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:13px;color:rgba(245,240,228,0.38);text-decoration:none;transition:color .2s;}
+.footer-col-links a:hover{color:var(--sage);}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:14px;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(245,240,228,0.2);}
+.footer-heat{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(212,82,42,0.4);}
+
+@media(max-width:1024px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .areas-card{grid-column:1/-1;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px;}
+}
+@media(max-width:768px){
+  .page-hero{padding:110px 6vw 48px;}
+  .main-layout{padding:36px 6vw 60px;}
+  .map-section,.faq-section{padding-left:6vw;padding-right:6vw;}
+  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+  .form-row{grid-template-columns:1fr;}
+  .sidebar{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .hero-steps{gap:8px;}
+  body{cursor:auto;}
+  .cursor,.cursor-ring{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- WHATSAPP WIDGET -->
+<div class="wa-widget">
+  <div class="wa-panel" id="waPanel">
+    <div class="wap-header">
+      <div class="wap-avatar">🌿</div>
+      <div>
+        <div class="wap-name">URO Support</div>
+        <div class="wap-status"><div class="wap-status-dot"></div>Usually replies in minutes</div>
+      </div>
+      <button class="wap-close" onclick="toggleWa()">×</button>
+    </div>
+    <div class="wap-body">
+      <div class="wap-msg">Hi! 👋 Welcome to Urban Rooftop Oasis. How can we help you today?</div>
+      <div class="wap-options">
+        <a class="wap-opt" href="https://wa.me/8801859929858?text=Hi%2C%20I%20want%20a%20free%20rooftop%20design" target="_blank">🌿 I want a free rooftop design</a>
+        <a class="wap-opt" href="https://wa.me/8801859929858?text=Hi%2C%20I%20want%20to%20know%20about%20pricing" target="_blank">💰 I want to know about pricing</a>
+        <a class="wap-opt" href="https://wa.me/8801859929858?text=Hi%2C%20I%20want%20to%20know%20about%20the%20care%20plan" target="_blank">🔄 Tell me about the care plan</a>
+        <a class="wap-opt" href="https://wa.me/8801859929858?text=Hi%2C%20I%20have%20a%20question" target="_blank">💬 I have another question</a>
+      </div>
+    </div>
+    <div class="wap-footer">
+      <div class="wap-input-row">
+        <input class="wap-input" placeholder="Type a message..." id="waInput" onkeydown="sendWaMsg(event)"/>
+        <button class="wap-send" onclick="sendWaCustom()">➤</button>
+      </div>
+    </div>
+  </div>
+  <div class="wa-bubble" onclick="toggleWa()">
+    💬
+    <div class="wa-badge"></div>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html" onclick="closeDrawer()">Home</a>
+  <a href="gardens.html" onclick="closeDrawer()">Our Gardens</a>
+  <a href="calculator.html" onclick="closeDrawer()">Calculator</a>
+  <a href="maintenance.html" onclick="closeDrawer()">Care Plan</a>
+  <a href="contact.html" onclick="closeDrawer()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">🌿</div>
+    <div class="nav-logo-text">Urban Rooftop Oasis<small>Dhaka · Bangladesh</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gardens.html">Our Gardens</a></li>
+    <li><a href="calculator.html">Calculator</a></li>
+    <li><a href="maintenance.html">Care Plan</a></li>
+    <li><a href="contact.html" class="active nav-cta">Get Started →</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero reveal">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Get Started</div>
+  <div class="hero-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Free · No Commitment</span></div>
+  <h1 class="hero-title">Get your free<br/><em>rooftop design.</em></h1>
+  <p class="hero-desc">Send us a short video of your rooftop. We'll deliver a personalised 2D Mood Board and transparent quote within 48 hours — completely free, zero obligation.</p>
+  <div class="hero-steps">
+    <div class="hero-step"><div class="hs-num">1</div><div class="hs-text">Fill the form below</div></div>
+    <div class="hero-step"><div class="hs-num">2</div><div class="hs-text">Upload your rooftop video</div></div>
+    <div class="hero-step"><div class="hs-num">3</div><div class="hs-text">Receive design in 48hrs</div></div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- FORM -->
+  <div class="form-card reveal">
+    <div class="form-card-header">
+      <div class="fch-title">🌿 Your Free Rooftop Design</div>
+      <div class="fch-sub">Takes 5 minutes. No site visit needed from us.</div>
+      <div class="fch-badge"><span>✓ Free · No obligation · 48hr turnaround</span></div>
+    </div>
+
+    <div class="form-body" id="formBody">
+
+      <!-- SECTION A -->
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(122,173,74,0.5);padding-bottom:10px;border-bottom:1px solid rgba(122,173,74,0.08);margin-bottom:18px;">About You</div>
+      <div class="form-row">
+        <div class="fg"><label>Full Name *</label><input type="text" id="fname" placeholder="e.g. Ahmed Rahman" required/></div>
+        <div class="fg"><label>WhatsApp Number *</label><input type="tel" id="fphone" placeholder="+880 1XXX XXXXXX" required/></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Email Address *</label><input type="email" id="femail" placeholder="your@email.com" required/></div>
+        <div class="fg"><label>Your Area in Dhaka</label>
+          <select id="farea">
+            <option value="">Select your area</option>
+            <option>Gulshan</option>
+            <option>Banani</option>
+            <option>Bashundhara</option>
+            <option>Other (contact us first)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SECTION B -->
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(122,173,74,0.5);padding-bottom:10px;border-bottom:1px solid rgba(122,173,74,0.08);margin:24px 0 18px;">Your Rooftop</div>
+      <div class="form-row full">
+        <div class="fg"><label>Building Address *</label><input type="text" id="faddress" placeholder="Full address including road and block number" required/></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Approximate Roof Size *</label><input type="text" id="fsize" placeholder="e.g. About 80 square metres"/></div>
+        <div class="fg"><label>Water Access on Rooftop?</label>
+          <select id="fwater">
+            <option value="">Select one</option>
+            <option>Yes — tap or pipe available</option>
+            <option>No — needs to be arranged</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="fg">
+          <label>Sunlight on your rooftop *</label>
+          <div class="radio-group" id="sunGroup">
+            <label class="radio-opt" onclick="pick('sunGroup',this)"><input type="radio" name="sun"/><div class="rdot"></div>☀️ Full sun (6+ hrs)</label>
+            <label class="radio-opt" onclick="pick('sunGroup',this)"><input type="radio" name="sun"/><div class="rdot"></div>⛅ Partial (3–6 hrs)</label>
+            <label class="radio-opt" onclick="pick('sunGroup',this)"><input type="radio" name="sun"/><div class="rdot"></div>🌥️ Mostly shaded</label>
+            <label class="radio-opt" onclick="pick('sunGroup',this)"><input type="radio" name="sun"/><div class="rdot"></div>🤷 Not sure</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION C -->
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(122,173,74,0.5);padding-bottom:10px;border-bottom:1px solid rgba(122,173,74,0.08);margin:24px 0 18px;">Your Vision</div>
+      <div class="form-row full">
+        <div class="fg">
+          <label>Primary goal for your rooftop *</label>
+          <div class="radio-group" id="goalGroup">
+            <label class="radio-opt" onclick="pick('goalGroup',this)"><input type="radio" name="goal"/><div class="rdot"></div>🛋️ Beautiful lounge space</label>
+            <label class="radio-opt" onclick="pick('goalGroup',this)"><input type="radio" name="goal"/><div class="rdot"></div>🍋 Grow my own food</label>
+            <label class="radio-opt" onclick="pick('goalGroup',this)"><input type="radio" name="goal"/><div class="rdot"></div>🌬️ Beat the heat</label>
+            <label class="radio-opt" onclick="pick('goalGroup',this)"><input type="radio" name="goal"/><div class="rdot"></div>✨ Mix of all three</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Budget Range</label>
+          <select id="fbudget">
+            <option value="">Select a range</option>
+            <option>Entry — up to ৳1 lakh</option>
+            <option>Mid — ৳1–2.5 lakh</option>
+            <option>Premium — ৳2.5 lakh+</option>
+            <option>I need guidance on what's realistic</option>
+          </select>
+        </div>
+        <div class="fg"><label>Timeline</label>
+          <select id="ftimeline">
+            <option value="">Select one</option>
+            <option>🔥 As soon as possible (within 4 weeks)</option>
+            <option>📅 Within 2–3 months</option>
+            <option>🗓️ Just planning ahead</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="fg">
+          <label>Upload Your Rooftop Video *</label>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="fvideo" accept="video/*" onchange="handleUpload(this)"/>
+            <div class="uz-icon">🎥</div>
+            <div class="uz-text">Walk slowly around your rooftop · <strong>Click or drag to upload</strong></div>
+            <div class="uz-hint">MP4 / MOV · Max 500MB · 60–120 seconds ideal · Good lighting helps</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="fg"><label>Anything else we should know?</label><textarea id="fnotes" placeholder="Structural concerns, style preferences, existing features, pet access — anything helps us design better for you."></textarea></div>
+      </div>
+
+      <div class="submit-row">
+        <div class="submit-note"><strong>100% free · Zero obligation.</strong><br/>You'll receive your Mood Board & quote within 48 hours via WhatsApp & email. We never share your details.</div>
+        <button class="btn-submit" onclick="submitForm()">Send My Rooftop Video <span class="arr">→</span></button>
+      </div>
+
+    </div><!-- /form-body -->
+
+    <!-- SUCCESS -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">🌿</div>
+      <div class="success-title">Your rooftop is in our hands!</div>
+      <div class="success-desc">We've received your video and details. Your personalised 2D Mood Board and quote will arrive within <strong>48 hours</strong> — via WhatsApp and email.<br/><br/>Want to chat in the meantime?</div>
+      <a href="https://wa.me/8801859929858?text=Hi%2C%20I%20just%20submitted%20my%20rooftop%20video%20via%20your%20website!" class="success-wa" target="_blank">💬 Message us on WhatsApp</a>
+    </div>
+
+  </div><!-- /form-card -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- CONTACT DETAILS -->
+    <div class="contact-card reveal">
+      <div class="cc-title">Get in touch</div>
+      <div class="cc-item">
+        <div class="cc-icon">📲</div>
+        <div>
+          <div class="cc-label">WhatsApp</div>
+          <div class="cc-value"><a href="https://wa.me/8801859929858">+880 1859-929858</a></div>
+        </div>
+      </div>
+      <div class="cc-item">
+        <div class="cc-icon">✉️</div>
+        <div>
+          <div class="cc-label">Email</div>
+          <div class="cc-value"><a href="mailto:hasibul.alam.siam@gmail.com">hasibul.alam.siam@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="cc-item">
+        <div class="cc-icon">📍</div>
+        <div>
+          <div class="cc-label">Service Areas</div>
+          <div class="cc-value">Gulshan · Banani · Bashundhara</div>
+        </div>
+      </div>
+      <div class="cc-item">
+        <div class="cc-icon">⏱️</div>
+        <div>
+          <div class="cc-label">Response Time</div>
+          <div class="cc-value">Mood Board within 48 hours · WhatsApp within 4 hours</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AREAS -->
+    <div class="areas-card reveal">
+      <div class="ac-header">
+        <div class="ac-title">📍 Current service areas</div>
+        <div class="ac-sub">Premium Dhaka locations</div>
+      </div>
+      <div class="ac-body">
+        <span class="area-pill">Gulshan</span>
+        <span class="area-pill">Banani</span>
+        <span class="area-pill">Bashundhara</span>
+        <div class="coming-soon">🗓️ Dhanmondi · Uttara · Baridhara — coming soon</div>
+      </div>
+    </div>
+
+    <!-- HOURS -->
+    <div class="hours-card reveal">
+      <div class="hours-title">Office Hours</div>
+      <div class="hours-row"><span class="hours-day">Saturday – Thursday</span><span class="hours-time">9:00 AM – 7:00 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Friday</span><span class="hours-time closed">Closed</span></div>
+      <div class="hours-row"><span class="hours-day">Emergency WhatsApp</span><span class="hours-time">Always on</span></div>
+    </div>
+
+  </div><!-- /sidebar -->
+
+</div><!-- /main-layout -->
+
+<!-- MAP -->
+<div class="map-section reveal">
+  <div class="map-header">
+    <div class="map-label">Where We Work</div>
+    <h2 class="map-title">Serving premium<br/><em>Dhaka locations.</em></h2>
+  </div>
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d29213.878093095767!2d90.41438!3d23.7937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Urban Rooftop Oasis service areas in Dhaka">
+    </iframe>
+    <div class="map-overlay-pills">
+      <span class="map-pill">📍 Gulshan</span>
+      <span class="map-pill">📍 Banani</span>
+      <span class="map-pill">📍 Bashundhara</span>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section reveal">
+  <div class="faq-header">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:12px;display:flex;align-items:center;gap:12px;"><span style="display:block;width:24px;height:1px;background:var(--sage);"></span>Quick Answers</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);color:var(--cream);line-height:1.1;">Questions before<br/><em style="color:var(--sage);">you submit?</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is the 2D Mood Board really free?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">Yes — completely free with zero obligation. You submit your rooftop video and a short form, and we deliver a personalised 2D Mood Board with a plant palette matched to your goals and an itemised quote within 48 hours. No payment of any kind until you decide to proceed.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What kind of video should I send?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">Just walk slowly around your rooftop holding your phone. 60–90 seconds is ideal. Show the floor surface, all four edges, any existing structures or raised areas, and the view from the rooftop. Good lighting makes it much easier for us to design accurately. Portrait or landscape is fine.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Do I need to know my exact roof size?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">Not at all. A rough estimate is completely fine — "about 80 square metres" or "roughly 20×15 feet" works perfectly. We verify the exact dimensions during the site assessment, which happens after you confirm the design. The quote we send is based on your estimate and adjusted after we visit.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">What happens after I submit?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">You'll receive a confirmation on WhatsApp and email immediately. Within 48 hours we'll send your personalised 2D Mood Board — a PDF with your plant palette, an overhead layout sketch of your rooftop, and a fully itemised quote. If you love it, we can proceed. If you'd like a full 3D render first, that requires a small refundable design deposit.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">My building is not in Gulshan, Banani or Bashundhara. Can you still help?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">We're currently focusing on Gulshan, Banani and Bashundhara to ensure the highest quality of service during our launch phase. If you're in another Dhaka area, WhatsApp us directly — we're expanding soon and may be able to accommodate you depending on location. We'll be honest about whether we can serve you well right now.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Can I just call or WhatsApp instead of filling the form?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">Absolutely — WhatsApp us at +880 1859-929858 anytime. However the form is the fastest way to get your free design, because it gives us everything we need to start immediately. A WhatsApp conversation will eventually need the same information, so the form saves time on both sides.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">
+        <div class="fbl-icon">🌿</div>
+        <div class="fbl-name">Urban Rooftop Oasis<small>Dhaka · Bangladesh</small></div>
+      </div>
+      <p class="footer-desc">Dhaka's premium rooftop garden design, installation & expert maintenance. One rooftop at a time.</p>
+      <div class="footer-contact">📲 +880 1859-929858</div>
+      <div class="footer-contact">✉️ hasibul.alam.siam@gmail.com</div>
+      <div class="footer-contact">📍 Gulshan · Banani · Bashundhara</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Pages</div>
+      <ul class="footer-col-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gardens.html">Our Gardens</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="maintenance.html">Care Plan</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Our Gardens</div>
+      <ul class="footer-col-links">
+        <li><a href="gardens.html#lounge">Aesthetic Lounge</a></li>
+        <li><a href="gardens.html#orchard">Urban Orchard</a></li>
+        <li><a href="gardens.html#cooler">Climate Cooler</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Follow Us</div>
+      <ul class="footer-col-links">
+        <li><a href="#" target="_blank">Instagram →</a></li>
+        <li><a href="#" target="_blank">Facebook →</a></li>
+        <li><a href="https://wa.me/8801859929858" target="_blank">WhatsApp →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Urban Rooftop Oasis · All rights reserved · Dhaka, Bangladesh</div>
+    <div class="footer-heat">🔥 Fighting Dhaka's urban heat, one rooftop at a time</div>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button,.radio-opt,.faq-q,.wap-opt').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.borderColor='rgba(122,173,74,0.7)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(122,173,74,0.4)';});
+});
+
+// NAV
+document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navDrawer').classList.toggle('open'));
+function closeDrawer(){document.getElementById('navDrawer').classList.remove('open');}
+
+// REVEAL
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// RADIO PICKER
+function pick(groupId, el){
+  document.querySelectorAll('#'+groupId+' .radio-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked=true;
+}
+
+// FILE UPLOAD
+function handleUpload(input){
+  if(input.files&&input.files[0]){
+    const f=input.files[0];
+    const zone=document.getElementById('uploadZone');
+    zone.innerHTML=`<div style="font-size:28px;margin-bottom:8px;">✅</div><div class="uz-text"><strong>${f.name}</strong></div><div class="uz-hint">${(f.size/1024/1024).toFixed(1)} MB · Ready to send</div>`;
+  }
+}
+
+// FORM SUBMIT
+function submitForm(){
+  const name=document.getElementById('fname').value.trim();
+  const phone=document.getElementById('fphone').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  if(!name||!phone||!email){
+    alert('Please fill in your name, WhatsApp number and email to continue.');
+    return;
+  }
+  document.getElementById('formBody').style.display='none';
+  document.getElementById('successState').classList.add('show');
+  document.querySelector('.form-card').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// FAQ
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+// WHATSAPP WIDGET
+let waOpen=false;
+function toggleWa(){
+  waOpen=!waOpen;
+  document.getElementById('waPanel').classList.toggle('open',waOpen);
+}
+function sendWaCustom(){
+  const msg=document.getElementById('waInput').value.trim();
+  if(!msg) return;
+  window.open(`https://wa.me/8801859929858?text=${encodeURIComponent(msg)}`,'_blank');
+  document.getElementById('waInput').value='';
+}
+function sendWaMsg(e){
+  if(e.key==='Enter') sendWaCustom();
+}
+// Auto-open widget after 8 seconds
+setTimeout(()=>{if(!waOpen){waOpen=true;document.getElementById('waPanel').classList.add('open');}},8000);
+</script>
+</body>
+</html>
