@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Urban Rooftop Oasis — Explore our 3 premium rooftop garden packages for Dhaka. Aesthetic Lounge, Urban Orchard, and Climate Cooler."/>
+<title>Our Gardens — Urban Rooftop Oasis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --void:#0a0d08;--deep:#111a0c;--bark:#1e2d14;--moss:#2d4a1a;
+  --leaf:#4a7a28;--sage:#7aad4a;--mist:#b8d494;--dew:#dff0c4;
+  --cream:#f5f0e4;--gold:#c8a03c;--amber:#e8b84b;--heat:#d4522a;--ink:#0d1208;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--cream);font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--sage);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+.cursor-ring{width:36px;height:36px;border:1px solid rgba(122,173,74,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s ease;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(10,13,8,0.97);border-bottom:1px solid rgba(122,173,74,0.1);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-icon{width:34px;height:34px;background:var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);line-height:1.1;}
+.nav-logo-text small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,228,0.5);text-decoration:none;padding:8px 12px;border-radius:6px;transition:all .2s;}
+.nav-links a:hover{color:var(--sage);background:rgba(122,173,74,0.07);}
+.nav-links a.active{color:var(--sage);}
+.nav-cta{background:var(--moss) !important;color:var(--cream) !important;border:1px solid rgba(122,173,74,0.3) !important;}
+.nav-cta:hover{background:var(--leaf) !important;}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.nav-toggle span{display:block;width:24px;height:1.5px;background:var(--cream);}
+.nav-drawer{position:fixed;inset:0;background:rgba(10,13,8,0.98);z-index:490;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;transform:translateX(100%);transition:transform .4s ease;}
+.nav-drawer.open{transform:translateX(0);}
+.nav-drawer a{font-family:'Playfair Display',serif;font-size:28px;color:var(--cream);text-decoration:none;}
+.nav-drawer a:hover{color:var(--sage);}
+.wa-float{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 6px 24px rgba(37,211,102,0.4);z-index:400;text-decoration:none;transition:transform .25s;}
+.wa-float:hover{transform:scale(1.1);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* PAGE HERO */
+.page-hero{padding:140px 8vw 80px;background:linear-gradient(160deg,var(--deep),var(--void));position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;bottom:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(122,173,74,0.07) 0%,transparent 70%);pointer-events:none;}
+.page-hero-inner{max-width:1200px;margin:0 auto;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,228,0.35);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.breadcrumb a{color:var(--sage);text-decoration:none;}
+.breadcrumb span{color:rgba(245,240,228,0.2);}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,80px);color:var(--cream);line-height:1.0;margin-bottom:20px;}
+.page-hero h1 em{font-style:italic;color:var(--sage);}
+.page-hero p{font-size:16px;color:rgba(245,240,228,0.55);line-height:1.75;max-width:560px;margin-bottom:40px;}
+
+/* BUNDLE TABS */
+.bundle-tabs{display:flex;gap:12px;flex-wrap:wrap;}
+.bundle-tab{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 20px;border-radius:6px;border:1px solid rgba(122,173,74,0.2);color:rgba(245,240,228,0.5);text-decoration:none;transition:all .25s;}
+.bundle-tab:hover,.bundle-tab.active{background:rgba(122,173,74,0.12);border-color:var(--sage);color:var(--sage);}
+
+/* SECTION BASE */
+.bundle-section{padding:100px 8vw;position:relative;}
+.bundle-section:nth-child(even){background:var(--deep);}
+.bundle-inner{max-width:1200px;margin:0 auto;}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.section-label::before{content:'';width:24px;height:1px;background:var(--sage);}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,56px);line-height:1.1;color:var(--cream);margin-bottom:16px;}
+.section-title em{font-style:italic;color:var(--sage);}
+.section-desc{font-size:15px;color:rgba(245,240,228,0.55);line-height:1.75;max-width:580px;margin-bottom:48px;}
+
+/* BUNDLE LAYOUT */
+.bundle-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.bundle-visual{position:relative;}
+.bundle-card-visual{background:rgba(30,45,20,0.5);border:1px solid rgba(122,173,74,0.15);border-radius:16px;overflow:hidden;}
+.bundle-card-visual.orchard{background:rgba(42,26,8,0.5);border-color:rgba(200,160,60,0.15);}
+.bundle-card-visual.cooler{background:rgba(6,13,20,0.5);border-color:rgba(42,107,180,0.15);}
+.bcv-top{height:220px;display:flex;align-items:center;justify-content:center;font-size:60px;letter-spacing:16px;position:relative;overflow:hidden;}
+.bundle-section:nth-child(1) .bcv-top{background:linear-gradient(160deg,#0d1a08,#1e3a10,#2d5a1a);}
+.bundle-section:nth-child(2) .bcv-top{background:linear-gradient(160deg,#150e04,#2a1a08,#4a2d10);}
+.bundle-section:nth-child(3) .bcv-top{background:linear-gradient(160deg,#060d14,#0d1a26,#142840);}
+.bcv-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(122,173,74,0.08);}
+.bcv-metric{background:var(--deep);padding:16px 12px;text-align:center;}
+.bcv-metric .val{font-family:'Playfair Display',serif;font-size:22px;color:var(--sage);line-height:1;margin-bottom:4px;}
+.bcv-metric .lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(184,212,148,0.4);}
+.price-block{background:rgba(122,173,74,0.06);border:1px solid rgba(122,173,74,0.15);border-radius:12px;padding:24px;margin-top:20px;}
+.price-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(122,173,74,0.6);margin-bottom:10px;}
+.price-range{font-family:'Playfair Display',serif;font-size:36px;color:var(--cream);line-height:1;margin-bottom:6px;}
+.price-note{font-size:11px;color:rgba(245,240,228,0.35);line-height:1.5;margin-bottom:18px;}
+.price-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.price-tier{background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.1);border-radius:8px;padding:12px 10px;text-align:center;}
+.pt-size{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(245,240,228,0.35);margin-bottom:5px;}
+.pt-price{font-family:'Playfair Display',serif;font-size:18px;color:var(--sage);}
+
+/* PLANT LISTS */
+.plant-content{}
+.plant-category{margin-bottom:32px;}
+.plant-cat-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(122,173,74,0.5);padding:8px 0;border-bottom:1px solid rgba(122,173,74,0.1);margin-bottom:14px;}
+.plant-list{display:flex;flex-direction:column;gap:8px;}
+.plant-item{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(122,173,74,0.08);border-radius:8px;padding:12px 16px;transition:border-color .2s;}
+.plant-item:hover{border-color:rgba(122,173,74,0.25);}
+.plant-emoji{font-size:20px;flex-shrink:0;width:30px;text-align:center;}
+.plant-info{flex:1;}
+.plant-name{font-size:13px;font-weight:600;color:var(--cream);margin-bottom:2px;}
+.plant-local{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,228,0.3);letter-spacing:.5px;}
+.plant-why{font-size:11px;color:rgba(245,240,228,0.4);line-height:1.4;margin-top:3px;}
+.plant-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
+.plant-badge.easy{background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.2);color:var(--sage);}
+.plant-badge.med{background:rgba(200,160,60,0.1);border:1px solid rgba(200,160,60,0.25);color:var(--gold);}
+.plant-badge.hero{background:rgba(212,82,42,0.1);border:1px solid rgba(212,82,42,0.2);color:var(--heat);}
+
+/* SOIL BOX */
+.soil-box{background:rgba(74,46,26,0.2);border:1px solid rgba(122,173,74,0.12);border-left:3px solid var(--amber);border-radius:8px;padding:18px 20px;margin-top:24px;}
+.soil-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.soil-text{font-size:12px;color:rgba(245,240,228,0.6);line-height:1.6;}
+
+/* CTA BAND */
+.cta-band{background:var(--moss);padding:80px 8vw;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 100%,rgba(74,122,40,0.4) 0%,transparent 70%);}
+.cta-band h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,50px);color:var(--cream);line-height:1.15;margin-bottom:16px;position:relative;}
+.cta-band h2 em{font-style:italic;color:var(--dew);}
+.cta-band p{font-size:15px;color:rgba(245,240,228,0.65);margin-bottom:32px;position:relative;max-width:480px;margin-left:auto;margin-right:auto;}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;}
+.btn-light{display:inline-flex;align-items:center;gap:10px;background:var(--cream);color:var(--ink);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:16px 28px;border-radius:8px;text-decoration:none;transition:all .25s;}
+.btn-light:hover{background:var(--dew);transform:translateY(-2px);}
+.btn-outline-light{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--cream);font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:16px 26px;border-radius:8px;text-decoration:none;border:1px solid rgba(245,240,228,0.3);transition:all .25s;}
+.btn-outline-light:hover{border-color:rgba(245,240,228,0.7);}
+
+/* FOOTER */
+footer{background:var(--void);border-top:1px solid rgba(122,173,74,0.1);padding:72px 8vw 36px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;max-width:1200px;margin:0 auto 56px;}
+.footer-brand-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.fbl-icon{width:40px;height:40px;background:var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;}
+.fbl-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--cream);line-height:1.1;}
+.fbl-name small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-style:normal;}
+.footer-desc{font-size:13px;color:rgba(245,240,228,0.38);line-height:1.7;margin-bottom:20px;}
+.footer-contact{font-size:12px;color:rgba(245,240,228,0.4);margin-bottom:8px;}
+.footer-col-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:18px;}
+.footer-col-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col-links a{font-size:13px;color:rgba(245,240,228,0.38);text-decoration:none;transition:color .2s;}
+.footer-col-links a:hover{color:var(--sage);}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:14px;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(245,240,228,0.2);}
+.footer-heat{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(212,82,42,0.4);}
+
+@media(max-width:1024px){
+  .bundle-grid{grid-template-columns:1fr;gap:40px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px;}
+}
+@media(max-width:768px){
+  .bundle-section{padding:72px 6vw;}
+  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+  .footer-grid{grid-template-columns:1fr;}
+  body{cursor:auto;}
+  .cursor,.cursor-ring{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<a href="https://wa.me/8801859929858?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Urban%20Rooftop%20Oasis" class="wa-float" target="_blank">💬</a>
+
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html" onclick="closeDrawer()">Home</a>
+  <a href="gardens.html" onclick="closeDrawer()">Our Gardens</a>
+  <a href="calculator.html" onclick="closeDrawer()">Calculator</a>
+  <a href="maintenance.html" onclick="closeDrawer()">Care Plan</a>
+  <a href="contact.html" onclick="closeDrawer()">Contact</a>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">🌿</div>
+    <div class="nav-logo-text">Urban Rooftop Oasis<small>Dhaka · Bangladesh</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gardens.html" class="active">Our Gardens</a></li>
+    <li><a href="calculator.html">Calculator</a></li>
+    <li><a href="maintenance.html">Care Plan</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started →</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb reveal">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      Our Gardens
+    </div>
+    <h1 class="reveal">Three ways to transform<br/><em>your rooftop.</em></h1>
+    <p class="reveal">Every garden is built from one of three expert-curated bundles — designed specifically for Dhaka's climate, your rooftop's conditions, and your personal goal.</p>
+    <div class="bundle-tabs reveal">
+      <a href="#lounge" class="bundle-tab">🛋️ Aesthetic Lounge</a>
+      <a href="#orchard" class="bundle-tab">🍋 Urban Orchard</a>
+      <a href="#cooler" class="bundle-tab">🌬️ Climate Cooler</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BUNDLE 1: AESTHETIC LOUNGE ══════════ -->
+<div class="bundle-section" id="lounge">
+  <div class="bundle-inner">
+    <div class="bundle-grid">
+
+      <div class="bundle-visual reveal">
+        <div class="bundle-card-visual">
+          <div class="bcv-top">🛋️🌿🌸</div>
+          <div class="bcv-metrics">
+            <div class="bcv-metric"><div class="val">Low</div><div class="lbl">Maintenance</div></div>
+            <div class="bcv-metric"><div class="val">~45</div><div class="lbl">Plants (50m²)</div></div>
+            <div class="bcv-metric"><div class="val">Visual</div><div class="lbl">Focus</div></div>
+          </div>
+        </div>
+        <div class="price-block">
+          <div class="price-label">Estimated Investment</div>
+          <div class="price-range">৳90,000 – 2,00,000</div>
+          <div class="price-note">Depends on rooftop size. Includes plants, soil, pots, labour & delivery. Final quote after video review.</div>
+          <div class="price-tiers">
+            <div class="price-tier"><div class="pt-size">Entry · 50m²</div><div class="pt-price">৳90,000</div></div>
+            <div class="price-tier"><div class="pt-size">Mid · 80m²</div><div class="pt-price">৳1,40,000</div></div>
+            <div class="price-tier"><div class="pt-size">Premium · 120m²+</div><div class="pt-price">৳2,00,000+</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plant-content reveal">
+        <div class="section-label">Bundle 01</div>
+        <h2 class="section-title">Aesthetic<br/><em>Lounge</em></h2>
+        <p class="section-desc">Beauty-first. Low-maintenance. Designed for Dhaka building owners who want a premium outdoor living space they can entertain in — without daily plant care.</p>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Statement / Anchor Plants</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🌴</div>
+              <div class="plant-info">
+                <div class="plant-name">Areca Palm (3–4ft)</div>
+                <div class="plant-local">আরেকা পাম · Qty: 4</div>
+                <div class="plant-why">Main visual statement. Extremely heat tolerant. Thrives on Dhaka rooftops.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌿</div>
+              <div class="plant-info">
+                <div class="plant-name">Dracaena Marginata</div>
+                <div class="plant-local">ড্রাসেনা · Qty: 3</div>
+                <div class="plant-why">Structural, dramatic look. Extremely low water needs.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🍃</div>
+              <div class="plant-info">
+                <div class="plant-name">Fiddle Leaf Fig</div>
+                <div class="plant-local">ফিডল লিফ ফিগ · Qty: 2</div>
+                <div class="plant-why">Premium aesthetic. Large dramatic leaves. Partial shade tolerant.</div>
+              </div>
+              <span class="plant-badge med">Medium</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Filler / Texture Plants</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🪴</div>
+              <div class="plant-info">
+                <div class="plant-name">Snake Plant (Sansevieria)</div>
+                <div class="plant-local">শাপলা পাতা · Qty: 6</div>
+                <div class="plant-why">Nearly indestructible. Releases oxygen at night. Perfect for Dhaka heat.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌾</div>
+              <div class="plant-info">
+                <div class="plant-name">Ornamental Grass (Pennisetum)</div>
+                <div class="plant-local">সৌন্দর্য ঘাস · Qty: 4</div>
+                <div class="plant-why">Movement and texture. Softens hard architectural lines beautifully.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌱</div>
+              <div class="plant-info">
+                <div class="plant-name">ZZ Plant</div>
+                <div class="plant-local">জেডজেড প্ল্যান্ট · Qty: 4</div>
+                <div class="plant-why">Glossy dark green leaves. Near zero water. Survives total neglect.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🪨</div>
+              <div class="plant-info">
+                <div class="plant-name">Jade Plant</div>
+                <div class="plant-local">জেড গাছ · Qty: 4</div>
+                <div class="plant-why">Succulent clusters. Requires almost no watering. Long-lived.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Trailing / Ground Cover</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🍀</div>
+              <div class="plant-info">
+                <div class="plant-name">Pothos / Money Plant</div>
+                <div class="plant-local">মানি প্ল্যান্ট · Qty: 8</div>
+                <div class="plant-why">Spills beautifully over pot edges and walls. Extremely fast growing.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">💚</div>
+              <div class="plant-info">
+                <div class="plant-name">Creeping Jenny</div>
+                <div class="plant-local">ক্রিপিং জেনি · Qty: 4</div>
+                <div class="plant-why">Bright chartreuse trailing plant. Adds colour contrast at edges.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Seasonal Accent (rotated each maintenance visit)</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🌸</div>
+              <div class="plant-info">
+                <div class="plant-name">Marigold / Gerbera / Portulaca</div>
+                <div class="plant-local">গাঁদা / জারবেরা / পর্তুলাকা · Qty: 6</div>
+                <div class="plant-why">Changed seasonally. Adds colour and life. Replaced on each maintenance visit.</div>
+              </div>
+              <span class="plant-badge easy">Seasonal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="soil-box">
+          <div class="soil-label">🌱 Soil Mix for this Bundle</div>
+          <div class="soil-text">Light potting mix + perlite + cocopeat — ratio 60:20:20. No heavy garden soil. Weight management is critical on rooftops. This mix is fast-draining, lightweight, and perfect for ornamental plants in Dhaka's climate.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BUNDLE 2: URBAN ORCHARD ══════════ -->
+<div class="bundle-section" id="orchard">
+  <div class="bundle-inner">
+    <div class="bundle-grid">
+
+      <div class="bundle-visual reveal">
+        <div class="bundle-card-visual orchard">
+          <div class="bcv-top">🍋🥭🌿</div>
+          <div class="bcv-metrics">
+            <div class="bcv-metric"><div class="val">Med</div><div class="lbl">Maintenance</div></div>
+            <div class="bcv-metric"><div class="val">~72</div><div class="lbl">Plants (50m²)</div></div>
+            <div class="bcv-metric"><div class="val">Edible</div><div class="lbl">Focus</div></div>
+          </div>
+        </div>
+        <div class="price-block">
+          <div class="price-label">Estimated Investment</div>
+          <div class="price-range">৳1,00,000 – 2,20,000</div>
+          <div class="price-note">Includes raised bed frames, drip irrigation, plants, soil & labour. Final quote after video review.</div>
+          <div class="price-tiers">
+            <div class="price-tier"><div class="pt-size">Entry · 50m²</div><div class="pt-price">৳1,00,000</div></div>
+            <div class="price-tier"><div class="pt-size">Mid · 80m²</div><div class="pt-price">৳1,55,000</div></div>
+            <div class="price-tier"><div class="pt-size">Premium · 120m²+</div><div class="pt-price">৳2,20,000+</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plant-content reveal">
+        <div class="section-label">Bundle 02</div>
+        <h2 class="section-title">Urban<br/><em>Orchard</em></h2>
+        <p class="section-desc">Grow your own food on your Dhaka rooftop. Dwarf fruit trees, organic vegetables, a full herb row — all maintained by our experts so you actually harvest results.</p>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Fruit Trees (dwarf / container varieties)</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🍋</div>
+              <div class="plant-info">
+                <div class="plant-name">Dwarf Lemon (Thai variety)</div>
+                <div class="plant-local">থাই লেবু গাছ · Qty: 2</div>
+                <div class="plant-why">Produces fruit in 6–8 months. Year-round yield. Client favourite.</div>
+              </div>
+              <span class="plant-badge hero">Star Plant</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🟢</div>
+              <div class="plant-info">
+                <div class="plant-name">Dwarf Guava (Thai)</div>
+                <div class="plant-local">থাই পেয়ারা · Qty: 2</div>
+                <div class="plant-why">Fastest fruiting dwarf tree. Very popular across Dhaka nurseries.</div>
+              </div>
+              <span class="plant-badge hero">Star Plant</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🥭</div>
+              <div class="plant-info">
+                <div class="plant-name">Dwarf Mango (Amrapali / Bari-4)</div>
+                <div class="plant-local">বারি আম · Qty: 1</div>
+                <div class="plant-why">Prestige plant. Container-friendly. Slower but highest emotional value for clients.</div>
+              </div>
+              <span class="plant-badge med">Medium</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Vegetables (raised bed)</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🍅</div>
+              <div class="plant-info">
+                <div class="plant-name">Tomato (hybrid)</div>
+                <div class="plant-local">টমেটো · Qty: 8 seedlings</div>
+                <div class="plant-why">High yield. Fast results. Every client loves seeing tomatoes grow.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌶️</div>
+              <div class="plant-info">
+                <div class="plant-name">Chilli / Capsicum</div>
+                <div class="plant-local">মরিচ গাছ · Qty: 6 seedlings</div>
+                <div class="plant-why">Essential for every Bangladeshi kitchen. Grows well in containers.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🍆</div>
+              <div class="plant-info">
+                <div class="plant-name">Eggplant (Brinjal)</div>
+                <div class="plant-local">বেগুন · Qty: 4 seedlings</div>
+                <div class="plant-why">Classic Bangladesh rooftop crop. Heavy yield in raised beds.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🎋</div>
+              <div class="plant-info">
+                <div class="plant-name">Bitter Gourd (Karela)</div>
+                <div class="plant-local">করলা · Qty: 3 seedlings</div>
+                <div class="plant-why">Climbs trellis beautifully. Productive and medicinal.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Herbs (dedicated herb row)</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🌿</div>
+              <div class="plant-info">
+                <div class="plant-name">Basil</div>
+                <div class="plant-local">তুলসী / বেসিল · Qty: 4 pots</div>
+                <div class="plant-why">Fast growing. Aromatic. Loved in both Bangladeshi and international cooking.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🍃</div>
+              <div class="plant-info">
+                <div class="plant-name">Mint (Pudina)</div>
+                <div class="plant-local">পুদিনা · Qty: 4 pots</div>
+                <div class="plant-why">Spreads fast. Loved for drinks, cooking, and fragrance on the rooftop.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌱</div>
+              <div class="plant-info">
+                <div class="plant-name">Coriander (Dhonepata)</div>
+                <div class="plant-local">ধনেপাতা · Qty: 4 pots</div>
+                <div class="plant-why">Used in almost every Bangladeshi dish. High demand, fast harvest.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🎋</div>
+              <div class="plant-info">
+                <div class="plant-name">Lemongrass</div>
+                <div class="plant-local">লেমনগ্রাস · Qty: 3 pots</div>
+                <div class="plant-why">Heat-proof. Also repels mosquitoes — a major bonus in Dhaka.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Leafy Greens</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🥬</div>
+              <div class="plant-info">
+                <div class="plant-name">Spinach (Palak Shak)</div>
+                <div class="plant-local">পালং শাক · Qty: 6 pots</div>
+                <div class="plant-why">Fast harvest in 3–4 weeks. Ideal for Dhaka's cooler months.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🔴</div>
+              <div class="plant-info">
+                <div class="plant-name">Red Amaranth (Lal Shak)</div>
+                <div class="plant-local">লাল শাক · Qty: 6 pots</div>
+                <div class="plant-why">Very Bangladeshi. Grows extremely fast. Beautiful red colour.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Companion / Pollinator Plants</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🌼</div>
+              <div class="plant-info">
+                <div class="plant-name">Marigold (Ganda Phul)</div>
+                <div class="plant-local">গাঁদা ফুল · Qty: 6</div>
+                <div class="plant-why">Natural pest control. Attracts pollinators. Improves fruit yield.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="soil-box">
+          <div class="soil-label">🌱 Soil Mix for this Bundle</div>
+          <div class="soil-text">Nutrient-enriched raised bed mix — garden soil + compost + vermicompost + cocopeat (40:30:20:10). Rich, water-retaining, slightly acidic. Perfect for edible plants. Drip irrigation is mandatory for this bundle to maintain consistent moisture in Dhaka's hot seasons.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BUNDLE 3: CLIMATE COOLER ══════════ -->
+<div class="bundle-section" id="cooler">
+  <div class="bundle-inner">
+    <div class="bundle-grid">
+
+      <div class="bundle-visual reveal">
+        <div class="bundle-card-visual cooler">
+          <div class="bcv-top">🌬️🌴🎋</div>
+          <div class="bcv-metrics">
+            <div class="bcv-metric"><div class="val">Low</div><div class="lbl">Maintenance</div></div>
+            <div class="bcv-metric"><div class="val">~65</div><div class="lbl">Plants (50m²)</div></div>
+            <div class="bcv-metric"><div class="val">−6°C</div><div class="lbl">Temp Drop</div></div>
+          </div>
+        </div>
+        <div class="price-block">
+          <div class="price-label">Estimated Investment</div>
+          <div class="price-range">৳1,30,000 – 2,60,000</div>
+          <div class="price-note">Includes large specimen plants, roof membrane, pots, soil & labour. Final quote after video review.</div>
+          <div class="price-tiers">
+            <div class="price-tier"><div class="pt-size">Entry · 50m²</div><div class="pt-price">৳1,30,000</div></div>
+            <div class="price-tier"><div class="pt-size">Mid · 80m²</div><div class="pt-price">৳1,90,000</div></div>
+            <div class="price-tier"><div class="pt-size">Premium · 120m²+</div><div class="pt-price">৳2,60,000+</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plant-content reveal">
+        <div class="section-label">Bundle 03</div>
+        <h2 class="section-title">Climate<br/><em>Cooler</em></h2>
+        <p class="section-desc">The scientific answer to Dhaka's 48°C rooftop heat. Maximum foliage density to create shade, reduce surface temperature by up to 6°C, and improve air quality for the entire building.</p>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Canopy Layer (shade-creating)</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🌴</div>
+              <div class="plant-info">
+                <div class="plant-name">Areca Palm (5–6ft large bush)</div>
+                <div class="plant-local">আরেকা পাম (বড়) · Qty: 6</div>
+                <div class="plant-why">Highest transpiration rate of any rooftop plant. Creates a real cooling canopy.</div>
+              </div>
+              <span class="plant-badge hero">Star Plant</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🎋</div>
+              <div class="plant-info">
+                <div class="plant-name">Bamboo (clumping variety)</div>
+                <div class="plant-local">বাঁশ (গুচ্ছ) · Qty: 4 clusters</div>
+                <div class="plant-why">Fast growing wind and heat barrier. Non-spreading clumping variety — stays contained.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌳</div>
+              <div class="plant-info">
+                <div class="plant-name">Ficus Benjamina (dense)</div>
+                <div class="plant-local">ফাইকাস · Qty: 3</div>
+                <div class="plant-why">Heavy leaf density creates shade. Strong air purifier. Proven in Dhaka climate.</div>
+              </div>
+              <span class="plant-badge med">Medium</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Mid Layer (bulk foliage)</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🍃</div>
+              <div class="plant-info">
+                <div class="plant-name">Aralia (large leaf)</div>
+                <div class="plant-local">আরালিয়া · Qty: 4</div>
+                <div class="plant-why">Dramatic large tropical leaves. Dense foliage. Fills mid-height gaps.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌿</div>
+              <div class="plant-info">
+                <div class="plant-name">Peace Lily</div>
+                <div class="plant-local">পিস লিলি · Qty: 5</div>
+                <div class="plant-why">High transpiration rate. Strong air purifier. Thrives in Dhaka humidity.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌱</div>
+              <div class="plant-info">
+                <div class="plant-name">Philodendron (large leaf)</div>
+                <div class="plant-local">ফিলোডেন্ড্রন · Qty: 4</div>
+                <div class="plant-why">Tropical feel. Fast growing. Thrives in Dhaka's heat and humidity.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🪴</div>
+              <div class="plant-info">
+                <div class="plant-name">Rubber Plant (Ficus elastica)</div>
+                <div class="plant-local">রাবার গাছ · Qty: 3</div>
+                <div class="plant-why">Dense glossy leaves. Absorbs urban pollution. Very long-lived.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Ground / Low Layer</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">🗡️</div>
+              <div class="plant-info">
+                <div class="plant-name">Snake Plant (large upright)</div>
+                <div class="plant-local">শাপলা পাতা (বড়) · Qty: 8</div>
+                <div class="plant-why">Releases oxygen at night. Completely heat and drought proof.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🌾</div>
+              <div class="plant-info">
+                <div class="plant-name">Liriope / Mondo Grass</div>
+                <div class="plant-local">লিরিওপে · Qty: 10 pots</div>
+                <div class="plant-why">Living carpet ground layer. Covers bare soil, reduces heat absorption from ground level.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🍀</div>
+              <div class="plant-info">
+                <div class="plant-name">Aglaonema (Chinese Evergreen)</div>
+                <div class="plant-local">চাইনিজ এভারগ্রিন · Qty: 6</div>
+                <div class="plant-why">Dense, colourful, shade tolerant. Excellent air purifier.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="plant-category">
+          <div class="plant-cat-label">Edge / Trailing Layer</div>
+          <div class="plant-list">
+            <div class="plant-item">
+              <div class="plant-emoji">💚</div>
+              <div class="plant-info">
+                <div class="plant-name">Creeping Jenny / Dichondra</div>
+                <div class="plant-local">ক্রিপিং জেনি · Qty: 6</div>
+                <div class="plant-why">Spills over edges. Increases total green coverage area significantly.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+            <div class="plant-item">
+              <div class="plant-emoji">🍀</div>
+              <div class="plant-info">
+                <div class="plant-name">Pothos / Money Plant</div>
+                <div class="plant-local">মানি প্ল্যান্ট · Qty: 6</div>
+                <div class="plant-why">Covers walls and edges fast. Adds significant green area with almost zero care.</div>
+              </div>
+              <span class="plant-badge easy">Easy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="soil-box">
+          <div class="soil-label">🌱 Soil Mix for this Bundle</div>
+          <div class="soil-text">Moisture-retaining mix — cocopeat + garden soil + perlite + organic compost (40:30:15:15). Stays moist longer, significantly reducing irrigation frequency. Lighter than standard garden soil — critical for rooftop weight management. Roof membrane protection layer is mandatory for this bundle.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band reveal">
+  <h2>Not sure which bundle<br/><em>is right for you?</em></h2>
+  <p>Send us your rooftop video and we'll recommend the perfect bundle for your space, climate, and goals — free, within 48 hours.</p>
+  <div class="cta-actions">
+    <a href="contact.html" class="btn-light">Get Free Design →</a>
+    <a href="calculator.html" class="btn-outline-light">Try the Calculator</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">
+        <div class="fbl-icon">🌿</div>
+        <div class="fbl-name">Urban Rooftop Oasis<small>Dhaka · Bangladesh</small></div>
+      </div>
+      <p class="footer-desc">Dhaka's premium rooftop garden design, installation & expert maintenance. One rooftop at a time.</p>
+      <div class="footer-contact">📲 +880 1859-929858</div>
+      <div class="footer-contact">✉️ hello@urbanrooftopoasis.com</div>
+      <div class="footer-contact">📍 Serving all Dhaka areas</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Pages</div>
+      <ul class="footer-col-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gardens.html">Our Gardens</a></li>
+        <li><a href="calculator.html">Calculator</a></li>
+        <li><a href="maintenance.html">Care Plan</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Our Gardens</div>
+      <ul class="footer-col-links">
+        <li><a href="#lounge">Aesthetic Lounge</a></li>
+        <li><a href="#orchard">Urban Orchard</a></li>
+        <li><a href="#cooler">Climate Cooler</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Follow Us</div>
+      <ul class="footer-col-links">
+        <li><a href="#" target="_blank">Instagram →</a></li>
+        <li><a href="#" target="_blank">Facebook →</a></li>
+        <li><a href="https://wa.me/8801859929858" target="_blank">WhatsApp →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Urban Rooftop Oasis · All rights reserved · Dhaka, Bangladesh</div>
+    <div class="footer-heat">🔥 Fighting Dhaka's urban heat, one rooftop at a time</div>
+  </div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.borderColor='rgba(122,173,74,0.7)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(122,173,74,0.4)';});
+});
+document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navDrawer').classList.toggle('open'));
+function closeDrawer(){document.getElementById('navDrawer').classList.remove('open');}
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
