@@ -3,389 +3,235 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Urban Rooftop Oasis — ঢাকার প্রিমিয়াম ছাদ বাগান। Design, installation and expert maintenance."/>
+<meta name="description" content="Urban Rooftop Oasis — Dhaka's premium rooftop garden design, installation & maintenance. Turn your dead concrete rooftop into a living oasis."/>
 <meta property="og:title" content="Urban Rooftop Oasis — Dhaka"/>
-<title>Urban Rooftop Oasis — ঢাকার ছাদ বাগান বিশেষজ্ঞ</title>
+<meta property="og:description" content="Premium rooftop gardens designed, installed & maintained for Dhaka building owners."/>
+<meta property="og:type" content="website"/>
+<title>Urban Rooftop Oasis — Dhaka's Rooftop Garden Experts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
 :root{
-  --bg:        #f0f7ec;
-  --bg2:       #e4f0dc;
-  --white:     #ffffff;
-  --green-deep:#1a3d0a;
-  --green-mid: #2d5c18;
-  --green:     #4a8c28;
-  --green-lt:  #7fc44a;
-  --green-pale:#c8e8b0;
-  --sage:      #7aad4a;
-  --amber:     #d4920a;
-  --heat:      #c94020;
-  --ink:       #101808;
-  --body:      #2a3820;
-  --muted:     #5a6e50;
-  --cream:     #fffef8;
+  --void:#0a0d08; --deep:#111a0c; --bark:#1e2d14; --moss:#2d4a1a;
+  --leaf:#4a7a28; --sage:#7aad4a; --mist:#b8d494; --dew:#dff0c4;
+  --cream:#f5f0e4; --paper:#faf7f0; --gold:#c8a03c; --amber:#e8b84b;
+  --heat:#d4522a; --rust:#8a3520; --sand:#c8a87a; --ink:#0d1208;
 }
-
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--body);font-family:'Syne',sans-serif;overflow-x:hidden;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--void);color:var(--cream);font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none;}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:0 5vw;height:68px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(240,247,236,0.92);
-  border-bottom:1px solid rgba(74,140,40,0.15);
-  backdrop-filter:blur(12px);
-}
+/* CURSOR */
+.cursor{width:8px;height:8px;background:var(--sage);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s;mix-blend-mode:screen;}
+.cursor-ring{width:36px;height:36px;border:1px solid rgba(122,173,74,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .18s ease;}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4;}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:72px;background:linear-gradient(to bottom,rgba(10,13,8,0.97),transparent);backdrop-filter:blur(2px);transition:background .4s;}
+nav.scrolled{background:rgba(10,13,8,0.98);border-bottom:1px solid rgba(122,173,74,0.1);}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo-icon{width:36px;height:36px;background:var(--green-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
-.nav-logo-name{font-family:'Playfair Display',serif;font-size:16px;color:var(--green-deep);line-height:1.1;font-weight:700;}
-.nav-logo-name small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-style:normal;font-weight:400;}
-.nav-links{display:flex;align-items:center;gap:2px;list-style:none;}
-.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:6px;transition:all .2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--green-mid);background:rgba(74,140,40,0.1);}
-.nav-cta{background:var(--green-mid) !important;color:white !important;border-radius:8px !important;}
-.nav-cta:hover{background:var(--green-deep) !important;color:white !important;}
+.nav-logo-icon{width:34px;height:34px;background:var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.nav-logo-text{font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);line-height:1.1;}
+.nav-logo-text small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,228,0.5);text-decoration:none;padding:8px 12px;border-radius:6px;transition:all .2s;}
+.nav-links a:hover{color:var(--sage);background:rgba(122,173,74,0.07);}
+.nav-links a.active{color:var(--sage);}
+.nav-cta{background:var(--moss) !important;color:var(--cream) !important;border:1px solid rgba(122,173,74,0.3) !important;}
+.nav-cta:hover{background:var(--leaf) !important;}
 .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
-.nav-toggle span{display:block;width:24px;height:2px;background:var(--green-deep);border-radius:2px;transition:.3s;}
-.nav-drawer{position:fixed;inset:0;background:rgba(240,247,236,0.98);z-index:490;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:32px;transform:translateX(100%);transition:transform .4s ease;}
+.nav-toggle span{display:block;width:24px;height:1.5px;background:var(--cream);transition:.3s;}
+
+/* DRAWER */
+.nav-drawer{position:fixed;inset:0;background:rgba(10,13,8,0.98);z-index:490;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;transform:translateX(100%);transition:transform .4s ease;}
 .nav-drawer.open{transform:translateX(0);}
-.nav-drawer a{font-family:'Playfair Display',serif;font-size:32px;color:var(--green-deep);text-decoration:none;font-style:italic;}
-.nav-drawer a:hover{color:var(--green);}
+.nav-drawer a{font-family:'Playfair Display',serif;font-size:28px;color:var(--cream);text-decoration:none;transition:color .2s;}
+.nav-drawer a:hover{color:var(--sage);}
 
-/* ── WA FLOAT ── */
-.wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(37,211,102,0.45);z-index:400;text-decoration:none;transition:transform .25s;}
-.wa-float:hover{transform:scale(1.1);}
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 6px 24px rgba(37,211,102,0.4);z-index:400;text-decoration:none;transition:transform .25s,box-shadow .25s;}
+.wa-float:hover{transform:scale(1.1) translateY(-2px);box-shadow:0 12px 36px rgba(37,211,102,0.5);}
+.wa-tooltip{position:absolute;right:70px;background:rgba(10,13,8,0.95);border:1px solid rgba(37,211,102,0.3);color:var(--cream);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:7px 14px;border-radius:6px;white-space:nowrap;opacity:0;transition:opacity .25s;pointer-events:none;}
+.wa-float:hover .wa-tooltip{opacity:1;}
 
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+/* BUTTONS */
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--sage);color:var(--ink);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:16px 30px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:all .25s;}
+.btn-primary:hover{background:var(--leaf);color:var(--cream);transform:translateY(-2px);box-shadow:0 12px 40px rgba(74,122,40,0.4);}
+.btn-primary .arr{transition:transform .25s;}
+.btn-primary:hover .arr{transform:translateX(4px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--cream);font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:16px 28px;border-radius:8px;text-decoration:none;border:1px solid rgba(245,240,228,0.2);transition:all .25s;}
+.btn-secondary:hover{border-color:rgba(122,173,74,0.5);color:var(--sage);background:rgba(122,173,74,0.06);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  background:linear-gradient(135deg, #e8f5df 0%, #f4faf0 40%, #ffffff 100%);
-  position:relative;
-  overflow:hidden;
-}
-.hero::before{
-  content:'';
-  position:absolute;
-  top:-200px;right:-200px;
-  width:700px;height:700px;
-  background:radial-gradient(circle, rgba(127,196,74,0.18) 0%, transparent 65%);
-  pointer-events:none;
-}
-.hero::after{
-  content:'';
-  position:absolute;
-  bottom:-100px;left:-100px;
-  width:500px;height:500px;
-  background:radial-gradient(circle, rgba(74,140,40,0.1) 0%, transparent 65%);
-  pointer-events:none;
-}
-.hero-left{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:120px 5vw 80px 8vw;
-  position:relative;z-index:2;
-}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  margin-bottom:28px;
-  animation:fadeUp .7s .1s both;
-}
-.eyebrow-dot{width:7px;height:7px;background:var(--amber);border-radius:50%;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(212,146,10,0.4);}50%{box-shadow:0 0 0 8px rgba(212,146,10,0);}}
-.eyebrow-bn{font-family:'Hind Siliguri',sans-serif;font-size:13px;color:var(--green-mid);font-weight:600;}
-.eyebrow-sep{color:var(--green-pale);font-size:14px;}
-.eyebrow-en{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 65% 50%,rgba(45,74,26,0.55) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(200,160,60,0.1) 0%,transparent 60%);}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:120px 5vw 80px 8vw;position:relative;z-index:2;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:32px;animation:fadeUp .8s .1s both;}
+.eyebrow-dot{width:6px;height:6px;background:var(--amber);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,184,75,0.4);}50%{box-shadow:0 0 0 8px rgba(232,184,75,0);}}
+.eyebrow-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(44px,5.5vw,82px);line-height:1.0;color:var(--cream);margin-bottom:28px;animation:fadeUp .8s .25s both;}
+.hero-title em{font-style:italic;color:var(--sage);display:block;}
+.hero-title .heat-word{color:var(--amber);font-style:italic;}
+.hero-sub{font-size:16px;color:rgba(245,240,228,0.65);line-height:1.75;max-width:440px;margin-bottom:48px;animation:fadeUp .8s .4s both;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;animation:fadeUp .8s .55s both;}
+.hero-stats{display:flex;gap:32px;margin-top:56px;padding-top:40px;border-top:1px solid rgba(245,240,228,0.1);animation:fadeUp .8s .7s both;}
+.stat-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--sage);line-height:1;margin-bottom:4px;}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,228,0.4);}
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:120px 6vw 80px 4vw;animation:fadeIn 1.2s .3s both;}
 
-.hero-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(40px,5vw,78px);
-  line-height:1.05;
-  color:var(--green-deep);
-  margin-bottom:10px;
-  animation:fadeUp .7s .2s both;
-}
-.hero-title em{font-style:italic;color:var(--green);}
-
-.hero-bn-line{
-  font-family:'Hind Siliguri',sans-serif;
-  font-size:clamp(18px,2.2vw,26px);
-  color:var(--green-mid);
-  font-weight:500;
-  margin-bottom:28px;
-  animation:fadeUp .7s .3s both;
-  line-height:1.5;
-}
-
-.hero-sub{
-  font-size:15px;
-  color:var(--muted);
-  line-height:1.8;
-  max-width:440px;
-  margin-bottom:40px;
-  animation:fadeUp .7s .4s both;
-}
-.hero-sub .bn{
-  font-family:'Hind Siliguri',sans-serif;
-  font-size:14px;
-  color:var(--green-mid);
-  display:block;
-  margin-top:6px;
-  font-weight:500;
-}
-
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s .5s both;}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--green-mid);color:white;
-  font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
-  padding:15px 28px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;
-  transition:all .25s;
-}
-.btn-primary:hover{background:var(--green-deep);transform:translateY(-2px);box-shadow:0 10px 32px rgba(45,92,24,0.3);}
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:8px;
-  background:white;color:var(--green-mid);
-  font-family:'Syne',sans-serif;font-size:13px;font-weight:600;
-  padding:15px 26px;border-radius:8px;text-decoration:none;
-  border:1.5px solid rgba(74,140,40,0.3);transition:all .25s;
-}
-.btn-secondary:hover{border-color:var(--green);background:rgba(74,140,40,0.05);}
-
-.hero-stats{
-  display:flex;gap:28px;margin-top:44px;padding-top:36px;
-  border-top:1px solid rgba(74,140,40,0.2);
-  animation:fadeUp .7s .65s both;
-}
-.stat-num{font-family:'Playfair Display',serif;font-size:30px;color:var(--green);line-height:1;margin-bottom:4px;}
-.stat-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
-
-/* HERO RIGHT — clean card, no floats */
-.hero-right{
-  position:relative;z-index:2;
-  display:flex;align-items:center;justify-content:center;
-  padding:100px 6vw 80px 3vw;
-  animation:fadeIn 1s .3s both;
-}
-.hero-card-wrap{width:100%;max-width:440px;}
-.roof-card{
-  background:white;
-  border:1.5px solid rgba(74,140,40,0.2);
-  border-radius:20px;
-  padding:28px;
-  box-shadow:0 8px 48px rgba(45,92,24,0.12);
-}
-.roof-card-top{
-  background:linear-gradient(160deg,#1a3d0a,#2d5c18,#3d7820);
-  border-radius:12px;
-  height:200px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:52px;letter-spacing:14px;
-  position:relative;overflow:hidden;
-  margin-bottom:20px;
-}
-.roof-card-top::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 80% 60% at 50% 80%,rgba(127,196,74,0.35) 0%,transparent 70%);
-}
-.temp-badge{
-  position:absolute;top:14px;right:14px;
-  background:rgba(201,64,32,0.12);
-  border:1px solid rgba(201,64,32,0.3);
-  border-radius:20px;padding:5px 12px;
-  font-family:'DM Mono',monospace;font-size:10px;
-  color:#c94020;
-  display:flex;align-items:center;gap:6px;
-  z-index:2;
-}
-.temp-dot{width:5px;height:5px;background:#c94020;border-radius:50%;animation:blink 1.5s infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+/* ROOF CARD */
+.roof-card{width:100%;max-width:480px;background:rgba(30,45,20,0.7);border:1px solid rgba(122,173,74,0.2);border-radius:16px;padding:28px;backdrop-filter:blur(20px);position:relative;overflow:hidden;}
+.roof-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--leaf),var(--amber),var(--leaf));}
+.roof-visual{width:100%;height:200px;background:linear-gradient(160deg,#1a2e10,#2d4a1a,#3d5a20);border-radius:10px;position:relative;overflow:hidden;margin-bottom:20px;}
+.roof-plants{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;letter-spacing:12px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.5));}
+.roof-temp-badge{position:absolute;top:14px;right:14px;background:rgba(212,82,42,0.15);border:1px solid rgba(212,82,42,0.3);border-radius:20px;padding:5px 11px;font-family:'DM Mono',monospace;font-size:10px;color:var(--heat);display:flex;align-items:center;gap:6px;}
+.temp-dot{width:5px;height:5px;background:var(--heat);border-radius:50%;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
 .roof-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.roof-metric{
-  background:var(--bg);border:1px solid rgba(74,140,40,0.12);
-  border-radius:8px;padding:12px 8px;text-align:center;
-}
-.rm-val{font-family:'Playfair Display',serif;font-size:20px;color:var(--green);line-height:1;margin-bottom:4px;}
-.rm-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+.roof-metric{background:rgba(255,255,255,0.04);border:1px solid rgba(122,173,74,0.12);border-radius:8px;padding:12px;text-align:center;}
+.metric-val{font-family:'Playfair Display',serif;font-size:20px;color:var(--sage);line-height:1;margin-bottom:4px;}
+.metric-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(184,212,148,0.45);}
+.float-badge{position:absolute;background:rgba(10,13,8,0.92);border:1px solid rgba(122,173,74,0.25);border-radius:10px;padding:10px 14px;backdrop-filter:blur(12px);animation:floatBadge 3s ease-in-out infinite;}
+.float-badge:nth-child(1){top:-20px;right:-16px;animation-delay:0s;}
+.float-badge:nth-child(2){bottom:-12px;left:-20px;animation-delay:1.5s;}
+.fb-icon{font-size:16px;margin-bottom:3px;}
+.fb-text{font-family:'DM Mono',monospace;font-size:9px;color:var(--mist);letter-spacing:.5px;}
+.fb-val{font-family:'Playfair Display',serif;font-size:14px;color:var(--sage);}
+@keyframes floatBadge{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
-/* STAT PILLS below card */
-.hero-pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
-.hero-pill{
-  background:white;border:1px solid rgba(74,140,40,0.2);
-  border-radius:20px;padding:6px 14px;
-  font-family:'Hind Siliguri',sans-serif;font-size:12px;
-  color:var(--green-mid);font-weight:500;
-  display:flex;align-items:center;gap:6px;
-}
-
-/* ── TICKER ── */
-.ticker{
-  background:var(--green-mid);
-  padding:12px 0;overflow:hidden;
-  border-top:1px solid rgba(74,140,40,0.3);
-  border-bottom:1px solid rgba(74,140,40,0.3);
-}
-.ticker-track{display:flex;animation:ticker 30s linear infinite;white-space:nowrap;width:max-content;}
-.ticker-item{
-  display:inline-flex;align-items:center;gap:16px;padding:0 32px;
-  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(255,255,255,0.65);
-}
-.ticker-item .tk-bn{
-  font-family:'Hind Siliguri',sans-serif;font-size:12px;letter-spacing:0;text-transform:none;color:rgba(255,255,255,0.85);font-weight:500;
-}
+/* ═══ TICKER ═══ */
+.ticker{background:var(--bark);border-top:1px solid rgba(122,173,74,0.15);border-bottom:1px solid rgba(122,173,74,0.15);padding:14px 0;overflow:hidden;}
+.ticker-track{display:flex;animation:ticker 28s linear infinite;white-space:nowrap;width:max-content;}
+.ticker-item{display:inline-flex;align-items:center;gap:18px;padding:0 36px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(184,212,148,0.45);}
 .ticker-item span{font-size:13px;}
 @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-/* ── SECTION BASE ── */
-section{padding:96px 8vw;position:relative;}
-section.alt{background:var(--bg2);}
-.section-label{
-  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:12px;
-}
-.section-label::before{content:'';width:24px;height:1px;background:var(--green);}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,52px);line-height:1.1;color:var(--green-deep);margin-bottom:16px;}
-.section-title em{font-style:italic;color:var(--green);}
-.section-desc{font-size:14px;color:var(--muted);line-height:1.8;max-width:560px;}
-.section-bn{font-family:'Hind Siliguri',sans-serif;font-size:15px;color:var(--green-mid);font-weight:500;margin-bottom:12px;line-height:1.6;}
+/* ═══ SECTION BASE ═══ */
+section{padding:100px 8vw;position:relative;}
+section.alt{background:var(--deep);}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-label::before{content:'';width:24px;height:1px;background:var(--sage);}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,56px);line-height:1.1;color:var(--cream);margin-bottom:20px;}
+.section-title em{font-style:italic;color:var(--sage);}
+.section-desc{font-size:15px;color:rgba(245,240,228,0.55);line-height:1.75;max-width:560px;}
 
-/* ── HEAT SECTION ── */
-.heat-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:1200px;margin:0 auto;}
-.heat-card{
-  background:white;border:1.5px solid rgba(201,64,32,0.15);
-  border-radius:16px;padding:32px;
-  box-shadow:0 4px 24px rgba(201,64,32,0.08);
-}
-.hc-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(201,64,32,0.7);margin-bottom:10px;}
-.hc-temp{font-family:'Playfair Display',serif;font-size:72px;color:var(--heat);line-height:1;margin-bottom:6px;}
-.hc-city{font-size:12px;color:var(--muted);margin-bottom:24px;font-family:'DM Mono',monospace;}
+/* ═══ HEAT SECTION ═══ */
+.heat-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto;}
+.heat-card{background:rgba(30,20,14,0.8);border:1px solid rgba(212,82,42,0.25);border-radius:16px;padding:36px;position:relative;overflow:hidden;}
+.heat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,82,42,0.06),transparent);}
+.hc-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(212,82,42,0.7);margin-bottom:10px;}
+.hc-temp{font-family:'Playfair Display',serif;font-size:76px;color:var(--heat);line-height:1;margin-bottom:6px;}
+.hc-city{font-size:13px;color:rgba(245,240,228,0.4);margin-bottom:24px;}
 .bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.bar-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);width:100px;flex-shrink:0;}
-.bar-track{flex:1;height:7px;background:rgba(0,0,0,0.07);border-radius:4px;overflow:hidden;}
-.bar-fill{height:100%;border-radius:4px;transition:width 1.5s ease;}
-.bar-fill.r{background:linear-gradient(90deg,#8a2010,#c94020);}
-.bar-fill.g{background:linear-gradient(90deg,var(--green-mid),var(--green-lt));}
-.bar-val{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);width:34px;text-align:right;}
-.problem-list{display:flex;flex-direction:column;gap:14px;margin-top:32px;}
-.problem-item{
-  display:flex;gap:16px;align-items:flex-start;
-  padding:16px 20px;background:white;
-  border:1.5px solid rgba(201,64,32,0.12);
-  border-left:3px solid var(--heat);border-radius:8px;
-}
-.problem-item.solved{border-left-color:var(--green);}
+.bar-label{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,228,0.4);width:100px;flex-shrink:0;}
+.bar-track{flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;transition:width 1.5s ease;}
+.bar-fill.r{background:linear-gradient(90deg,var(--rust),var(--heat));}
+.bar-fill.g{background:linear-gradient(90deg,var(--moss),var(--sage));}
+.bar-val{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,240,228,0.35);width:32px;text-align:right;}
+.problem-list{display:flex;flex-direction:column;gap:16px;margin-top:36px;}
+.problem-item{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-left:3px solid var(--heat);border-radius:8px;}
+.problem-item.solved{border-left-color:var(--sage);}
 .pi-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
-.pi-title{font-size:13px;font-weight:700;color:var(--green-deep);margin-bottom:3px;}
-.pi-desc{font-size:12px;color:var(--muted);line-height:1.6;}
-.pi-bn{font-family:'Hind Siliguri',sans-serif;font-size:12px;color:var(--green-mid);font-weight:500;margin-bottom:3px;}
+.pi-title{font-size:13px;font-weight:600;color:var(--cream);margin-bottom:4px;}
+.pi-desc{font-size:12px;color:rgba(245,240,228,0.45);line-height:1.6;}
 
-/* ── PROCESS ── */
-.process-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
-  max-width:1200px;margin:52px auto 0;
-  background:rgba(74,140,40,0.08);
-  border:1.5px solid rgba(74,140,40,0.15);
-  border-radius:16px;overflow:hidden;
-}
-.process-step{background:white;padding:36px 24px;position:relative;transition:background .25s;}
-.process-step:hover{background:var(--bg);}
-.process-step:not(:last-child)::after{content:'';position:absolute;right:0;top:36px;bottom:36px;width:1px;background:rgba(74,140,40,0.1);}
-.ps-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(74,140,40,0.4);margin-bottom:18px;}
+/* ═══ PROCESS ═══ */
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;max-width:1200px;margin:56px auto 0;background:rgba(122,173,74,0.07);border:1px solid rgba(122,173,74,0.1);border-radius:16px;overflow:hidden;}
+.process-step{background:var(--deep);padding:36px 24px;position:relative;transition:background .3s;}
+.process-step:hover{background:var(--bark);}
+.process-step:not(:last-child)::after{content:'';position:absolute;right:0;top:36px;bottom:36px;width:1px;background:rgba(122,173,74,0.1);}
+.ps-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(122,173,74,0.4);margin-bottom:18px;}
 .ps-icon{font-size:30px;margin-bottom:14px;display:block;}
-.ps-bn{font-family:'Hind Siliguri',sans-serif;font-size:13px;color:var(--green-mid);font-weight:600;margin-bottom:4px;}
-.ps-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--green-deep);margin-bottom:10px;line-height:1.2;}
-.ps-desc{font-size:12px;color:var(--muted);line-height:1.65;}
-.ps-tag{display:inline-block;margin-top:14px;background:rgba(74,140,40,0.1);border:1px solid rgba(74,140,40,0.2);color:var(--green);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:4px;}
-.ps-tag.gold{background:rgba(212,146,10,0.1);border-color:rgba(212,146,10,0.25);color:var(--amber);}
+.ps-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--cream);margin-bottom:10px;line-height:1.2;}
+.ps-desc{font-size:12px;color:rgba(245,240,228,0.45);line-height:1.65;}
+.ps-tag{display:inline-block;margin-top:14px;background:rgba(122,173,74,0.1);border:1px solid rgba(122,173,74,0.2);color:var(--sage);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:4px;}
+.ps-tag.gold{background:rgba(200,160,60,0.1);border-color:rgba(200,160,60,0.25);color:var(--gold);}
 
-/* ── BUNDLE PREVIEW ── */
-.bundle-preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:52px auto 0;}
-.bp-card{border-radius:14px;overflow:hidden;border:1.5px solid rgba(74,140,40,0.12);text-decoration:none;transition:transform .3s,box-shadow .3s,border-color .3s;display:block;background:white;}
-.bp-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(45,92,24,0.15);border-color:rgba(74,140,40,0.35);}
-.bp-top{padding:32px 24px 24px;position:relative;overflow:hidden;min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;}
+/* ═══ BUNDLE PREVIEW ═══ */
+.bundle-preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:56px auto 0;}
+.bp-card{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);transition:transform .3s,border-color .3s,box-shadow .3s;text-decoration:none;}
+.bp-card:hover{transform:translateY(-6px);border-color:rgba(122,173,74,0.3);box-shadow:0 20px 56px rgba(0,0,0,0.4);}
+.bp-top{padding:32px 24px 24px;position:relative;overflow:hidden;min-height:190px;display:flex;flex-direction:column;justify-content:flex-end;}
 .bp-card:nth-child(1) .bp-top{background:linear-gradient(160deg,#0d1a08,#1e3a10,#2d5a1a);}
 .bp-card:nth-child(2) .bp-top{background:linear-gradient(160deg,#150e04,#2a1a08,#4a2d10);}
 .bp-card:nth-child(3) .bp-top{background:linear-gradient(160deg,#060d14,#0d1a26,#142840);}
-.bp-bg-emoji{position:absolute;top:10px;right:10px;font-size:60px;opacity:.1;line-height:1;filter:blur(2px);}
-.bp-emoji{font-size:32px;margin-bottom:10px;display:block;}
-.bp-name{font-family:'Playfair Display',serif;font-size:21px;color:white;margin-bottom:4px;}
-.bp-tag{font-size:11px;color:rgba(255,255,255,0.5);}
-.bp-body{padding:18px 24px 22px;}
-.bp-bn{font-family:'Hind Siliguri',sans-serif;font-size:13px;color:var(--green-mid);font-weight:600;margin-bottom:6px;}
-.bp-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:14px;}
-.bp-cta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:6px;}
+.bp-bg-emoji{position:absolute;top:12px;right:12px;font-size:64px;opacity:.1;line-height:1;filter:blur(2px);}
+.bp-emoji{font-size:34px;margin-bottom:12px;display:block;}
+.bp-name{font-family:'Playfair Display',serif;font-size:22px;color:var(--cream);margin-bottom:5px;}
+.bp-tag{font-size:12px;color:rgba(245,240,228,0.45);}
+.bp-body{background:var(--deep);padding:20px 24px;}
+.bp-desc{font-size:12px;color:rgba(245,240,228,0.55);line-height:1.6;margin-bottom:14px;}
+.bp-cta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage);display:flex;align-items:center;gap:6px;}
 .bp-cta::after{content:'→';transition:transform .25s;}
 .bp-card:hover .bp-cta::after{transform:translateX(4px);}
 
-/* ── TESTIMONIALS ── */
-.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1200px;margin:52px auto 0;}
-.trust-card{background:white;border:1.5px solid rgba(74,140,40,0.12);border-radius:12px;padding:26px 22px;transition:border-color .3s,transform .3s;}
-.trust-card:hover{border-color:rgba(74,140,40,0.3);transform:translateY(-4px);}
+/* ═══ TRUST ═══ */
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1200px;margin:56px auto 0;}
+.trust-card{background:rgba(30,45,20,0.4);border:1px solid rgba(122,173,74,0.12);border-radius:12px;padding:26px 22px;transition:border-color .3s,transform .3s;}
+.trust-card:hover{border-color:rgba(122,173,74,0.3);transform:translateY(-4px);}
 .trust-stars{color:var(--amber);font-size:13px;margin-bottom:14px;letter-spacing:2px;}
-.trust-quote{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:var(--green-deep);line-height:1.7;margin-bottom:18px;}
+.trust-quote{font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:var(--cream);line-height:1.65;margin-bottom:18px;}
 .trust-author{display:flex;align-items:center;gap:10px;}
-.trust-avatar{width:38px;height:38px;border-radius:50%;background:var(--green-mid);display:flex;align-items:center;justify-content:center;font-size:16px;}
-.trust-name{font-size:13px;font-weight:700;color:var(--green-deep);}
-.trust-loc{font-family:'Hind Siliguri',sans-serif;font-size:11px;color:var(--muted);}
+.trust-avatar{width:38px;height:38px;border-radius:50%;background:var(--moss);display:flex;align-items:center;justify-content:center;font-size:16px;}
+.trust-name{font-size:12px;font-weight:600;color:var(--cream);}
+.trust-loc{font-family:'DM Mono',monospace;font-size:9px;color:rgba(245,240,228,0.3);letter-spacing:.5px;}
 
-/* ── CTA BAND ── */
-.cta-band{
-  background:var(--green-mid);
-  padding:80px 8vw;text-align:center;
-  position:relative;overflow:hidden;
-}
-.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 100%,rgba(127,196,74,0.25) 0%,transparent 70%);}
-.cta-band h2{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,50px);color:white;line-height:1.15;margin-bottom:10px;position:relative;}
-.cta-band h2 em{font-style:italic;color:var(--green-pale);}
-.cta-band .bn{font-family:'Hind Siliguri',sans-serif;font-size:18px;color:rgba(255,255,255,0.8);margin-bottom:28px;position:relative;display:block;}
-.cta-band p{font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:32px;position:relative;max-width:480px;margin-left:auto;margin-right:auto;}
-.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;}
-.btn-light{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--green-mid);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:15px 28px;border-radius:8px;text-decoration:none;transition:all .25s;}
-.btn-light:hover{background:var(--bg);transform:translateY(-2px);}
-.btn-outline-light{display:inline-flex;align-items:center;gap:8px;background:transparent;color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:15px 26px;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.35);transition:all .25s;}
-.btn-outline-light:hover{border-color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.07);}
+/* ═══ CTA BAND ═══ */
+.cta-band{background:var(--moss);padding:80px 8vw;text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 100%,rgba(74,122,40,0.4) 0%,transparent 70%);}
+.cta-band h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,52px);color:var(--cream);line-height:1.15;margin-bottom:18px;position:relative;}
+.cta-band h2 em{font-style:italic;color:var(--dew);}
+.cta-band p{font-size:15px;color:rgba(245,240,228,0.65);margin-bottom:36px;position:relative;max-width:500px;margin-left:auto;margin-right:auto;}
+.cta-band .actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;}
+.btn-light{display:inline-flex;align-items:center;gap:10px;background:var(--cream);color:var(--ink);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:16px 30px;border-radius:8px;text-decoration:none;transition:all .25s;}
+.btn-light:hover{background:var(--dew);transform:translateY(-2px);}
+.btn-outline-light{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--cream);font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:16px 28px;border-radius:8px;text-decoration:none;border:1px solid rgba(245,240,228,0.35);transition:all .25s;}
+.btn-outline-light:hover{border-color:rgba(245,240,228,0.7);background:rgba(245,240,228,0.07);}
 
-/* ── FOOTER ── */
-footer{background:var(--green-deep);padding:64px 8vw 32px;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;max-width:1200px;margin:0 auto 48px;}
-.footer-brand-logo{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
-.fbl-icon{width:38px;height:38px;background:var(--green-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
-.fbl-name{font-family:'Playfair Display',serif;font-size:17px;color:white;line-height:1.1;}
-.fbl-name small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--green-lt);font-style:normal;}
-.footer-desc{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.75;margin-bottom:18px;}
-.footer-bn{font-family:'Hind Siliguri',sans-serif;font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:14px;line-height:1.65;}
-.footer-contact{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:8px;}
-.footer-col-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--green-lt);margin-bottom:16px;}
+/* ═══ FOOTER ═══ */
+footer{background:var(--void);border-top:1px solid rgba(122,173,74,0.1);padding:72px 8vw 36px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;max-width:1200px;margin:0 auto 56px;}
+.footer-brand-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.fbl-icon{width:40px;height:40px;background:var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;}
+.fbl-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--cream);line-height:1.1;}
+.fbl-name small{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-style:normal;}
+.footer-desc{font-size:13px;color:rgba(245,240,228,0.38);line-height:1.7;margin-bottom:20px;}
+.footer-contact{font-size:12px;color:rgba(245,240,228,0.4);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.footer-col-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin-bottom:18px;}
 .footer-col-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.footer-col-links a{font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color .2s;}
-.footer-col-links a:hover{color:var(--green-lt);}
-.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,0.07);flex-wrap:wrap;gap:12px;}
-.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,0.2);}
-.footer-heat{font-family:'Hind Siliguri',sans-serif;font-size:11px;color:rgba(201,64,32,0.5);}
+.footer-col-links a{font-size:13px;color:rgba(245,240,228,0.38);text-decoration:none;transition:color .2s;}
+.footer-col-links a:hover{color:var(--sage);}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid rgba(255,255,255,0.05);flex-wrap:wrap;gap:14px;}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(245,240,228,0.2);}
+.footer-heat{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(212,82,42,0.4);}
 
-/* ── RESPONSIVE ── */
+/* ═══ RESPONSIVE ═══ */
 @media(max-width:1024px){
   .hero{grid-template-columns:1fr;}
   .hero-right{display:none;}
-  .hero-left{padding:130px 8vw 80px;}
-  .heat-grid{grid-template-columns:1fr;gap:40px;}
+  .hero-left{padding:140px 8vw 80px;}
+  .heat-grid{grid-template-columns:1fr;gap:48px;}
   .process-grid{grid-template-columns:repeat(2,1fr);}
   .process-step:nth-child(2)::after{display:none;}
   .bundle-preview-grid{grid-template-columns:1fr 1fr;}
   .trust-grid{grid-template-columns:1fr 1fr;}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px;}
 }
 @media(max-width:768px){
-  section{padding:64px 6vw;}
+  section{padding:72px 6vw;}
   .nav-links{display:none;}
   .nav-toggle{display:flex;}
   .process-grid{grid-template-columns:1fr;}
@@ -393,89 +239,95 @@ footer{background:var(--green-deep);padding:64px 8vw 32px;}
   .bundle-preview-grid{grid-template-columns:1fr;}
   .trust-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
-  .hero-stats{gap:18px;}
+  .hero-stats{gap:20px;}
+  body{cursor:auto;}
+  .cursor,.cursor-ring{display:none;}
 }
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 </style>
 </head>
 <body>
 
-<!-- WA FLOAT -->
-<a href="https://wa.me/8801859929858?text=Hi%2C%20Urban%20Rooftop%20Oasis%20সম্পর্কে%20জানতে%20চাই" class="wa-float" target="_blank" rel="noopener">💬</a>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-<!-- MOBILE DRAWER -->
+<!-- WA FLOAT -->
+<a href="https://wa.me/8801859929858?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Urban%20Rooftop%20Oasis" class="wa-float" target="_blank" rel="noopener">
+  💬<span class="wa-tooltip">Chat on WhatsApp</span>
+</a>
+
+<!-- DRAWER -->
 <div class="nav-drawer" id="navDrawer">
   <a href="index.html" onclick="closeDrawer()">Home</a>
-  <a href="gardens.html" onclick="closeDrawer()">আমাদের গার্ডেন</a>
+  <a href="gardens.html" onclick="closeDrawer()">Our Gardens</a>
   <a href="calculator.html" onclick="closeDrawer()">Calculator</a>
   <a href="maintenance.html" onclick="closeDrawer()">Care Plan</a>
-  <a href="contact.html" onclick="closeDrawer()">যোগাযোগ করুন</a>
+  <a href="contact.html" onclick="closeDrawer()">Contact</a>
 </div>
 
 <!-- NAV -->
 <nav id="mainNav">
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-icon">🌿</div>
-    <div class="nav-logo-name">Urban Rooftop Oasis<small>ঢাকার ছাদ বাগান বিশেষজ্ঞ</small></div>
+    <div class="nav-logo-text">Urban Rooftop Oasis<small>Dhaka · Bangladesh</small></div>
   </a>
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="gardens.html">Our Gardens</a></li>
     <li><a href="calculator.html">Calculator</a></li>
     <li><a href="maintenance.html">Care Plan</a></li>
-    <li><a href="contact.html" class="nav-cta">বিনামূল্যে ডিজাইন →</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started →</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- ══ HERO ══ -->
+<!-- ══════════ HERO ══════════ -->
 <section class="hero" style="padding:0;">
+  <div class="hero-bg"></div>
   <div class="hero-left">
     <div class="hero-eyebrow">
       <div class="eyebrow-dot"></div>
-      <span class="eyebrow-bn">ঢাকার ছাদ বাগান বিশেষজ্ঞ</span>
-      <span class="eyebrow-sep">·</span>
-      <span class="eyebrow-en">Rooftop Experts</span>
+      <span class="eyebrow-text">Dhaka's Rooftop Garden Experts</span>
     </div>
     <h1 class="hero-title">
-      আপনার ছাদ।<br/>
-      <em>নতুনভাবে।</em>
+      Your Rooftop.<br/>
+      <em>Reimagined.</em><br/>
+      <span class="heat-word">Cooler.</span>
     </h1>
-    <p class="hero-bn-line">গরমে বেহাল ছাদকে বানিয়ে দিই সবুজ স্বর্গ।</p>
-    <p class="hero-sub">
-      Dhaka's heat is relentless. We turn dead concrete rooftops into premium living gardens — designed, installed, and maintained by experts.
-      <span class="bn">আপনাকে কিছুই করতে হবে না। সব আমরা করি।</span>
-    </p>
+    <p class="hero-sub">Dhaka's heat is relentless. We turn dead concrete rooftops into premium living gardens — designed, installed, and maintained by experts. You do nothing. We do everything.</p>
     <div class="hero-actions">
-      <a href="contact.html" class="btn-primary">বিনামূল্যে ডিজাইন নিন →</a>
-      <a href="gardens.html" class="btn-secondary">আমাদের গার্ডেন দেখুন</a>
+      <a href="contact.html" class="btn-primary">Get Your Free Design <span class="arr">→</span></a>
+      <a href="gardens.html" class="btn-secondary">See Our Gardens</a>
     </div>
     <div class="hero-stats">
-      <div><div class="stat-num">৪৮ঘ</div><div class="stat-label">Design delivered</div></div>
-      <div><div class="stat-num">৩×</div><div class="stat-label">Expert visits/year</div></div>
-      <div><div class="stat-num">১০০%</div><div class="stat-label">Done for you</div></div>
+      <div><div class="stat-num">48h</div><div class="stat-label">Design delivered</div></div>
+      <div><div class="stat-num">3×</div><div class="stat-label">Expert visits/year</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">Done for you</div></div>
     </div>
   </div>
-
   <div class="hero-right">
-    <div class="hero-card-wrap">
+    <div style="width:100%;max-width:480px;position:relative;">
+      <div class="float-badge">
+        <div class="fb-icon">🌡️</div>
+        <div class="fb-text">Temp Reduced</div>
+        <div class="fb-val">−6°C</div>
+      </div>
       <div class="roof-card">
-        <div class="roof-card-top">
-          <div class="temp-badge"><div class="temp-dot"></div>Dhaka Heat Island</div>
-          🌿🌴🌸
+        <div class="roof-visual">
+          <div class="roof-temp-badge"><div class="temp-dot"></div>Dhaka Heat Island</div>
+          <div class="roof-plants">🌿🌴🌸</div>
         </div>
         <div class="roof-metrics">
-          <div class="roof-metric"><div class="rm-val">৯২%</div><div class="rm-label">Plant survival</div></div>
-          <div class="roof-metric"><div class="rm-val">−৬°C</div><div class="rm-label">Temp drop</div></div>
-          <div class="roof-metric"><div class="rm-val">∞</div><div class="rm-label">Maintained</div></div>
+          <div class="roof-metric"><div class="metric-val">92%</div><div class="metric-label">Plant survival</div></div>
+          <div class="roof-metric"><div class="metric-val">−6°C</div><div class="metric-label">Temp drop</div></div>
+          <div class="roof-metric"><div class="metric-val">∞</div><div class="metric-label">Maintained</div></div>
         </div>
       </div>
-      <div class="hero-pills">
-        <div class="hero-pill">📍 গুলশান · বনানী · বসুন্ধরা</div>
-        <div class="hero-pill">✅ ৪৮ঘণ্টায় ডিজাইন</div>
+      <div class="float-badge">
+        <div class="fb-icon">📍</div>
+        <div class="fb-text">Now serving</div>
+        <div class="fb-val">Dhaka</div>
       </div>
     </div>
   </div>
@@ -484,121 +336,108 @@ footer{background:var(--green-deep);padding:64px 8vw 32px;}
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <span class="ticker-item"><span>🌿</span><span class="tk-bn">প্রিমিয়াম ছাদ বাগান</span></span>
+    <span class="ticker-item"><span>🌿</span>Premium Rooftop Design</span>
     <span class="ticker-item"><span>🔥</span>Dhaka Heat Solution</span>
-    <span class="ticker-item"><span>🌱</span><span class="tk-bn">বিশেষজ্ঞ ইনস্টলেশন</span></span>
+    <span class="ticker-item"><span>🌱</span>Expert Installation</span>
     <span class="ticker-item"><span>📋</span>Rooftop Health Reports</span>
-    <span class="ticker-item"><span>🌴</span><span class="tk-bn">আর্বান অর্চার্ড</span></span>
+    <span class="ticker-item"><span>🌴</span>Urban Orchard Packages</span>
     <span class="ticker-item"><span>❄️</span>Climate Cooling Gardens</span>
-    <span class="ticker-item"><span>🛋️</span><span class="tk-bn">অ্যাসথেটিক লাউঞ্জ</span></span>
+    <span class="ticker-item"><span>🛋️</span>Aesthetic Lounge Designs</span>
     <span class="ticker-item"><span>📲</span>WhatsApp Plant Support</span>
-    <span class="ticker-item"><span>🌿</span><span class="tk-bn">প্রিমিয়াম ছাদ বাগান</span></span>
+    <span class="ticker-item"><span>🌿</span>Premium Rooftop Design</span>
     <span class="ticker-item"><span>🔥</span>Dhaka Heat Solution</span>
-    <span class="ticker-item"><span>🌱</span><span class="tk-bn">বিশেষজ্ঞ ইনস্টলেশন</span></span>
+    <span class="ticker-item"><span>🌱</span>Expert Installation</span>
     <span class="ticker-item"><span>📋</span>Rooftop Health Reports</span>
-    <span class="ticker-item"><span>🌴</span><span class="tk-bn">আর্বান অর্চার্ড</span></span>
+    <span class="ticker-item"><span>🌴</span>Urban Orchard Packages</span>
     <span class="ticker-item"><span>❄️</span>Climate Cooling Gardens</span>
-    <span class="ticker-item"><span>🛋️</span><span class="tk-bn">অ্যাসথেটিক লাউঞ্জ</span></span>
+    <span class="ticker-item"><span>🛋️</span>Aesthetic Lounge Designs</span>
     <span class="ticker-item"><span>📲</span>WhatsApp Plant Support</span>
   </div>
 </div>
 
-<!-- ══ HEAT PROBLEM ══ -->
+<!-- ══════════ HEAT PROBLEM ══════════ -->
 <section class="alt">
   <div class="heat-grid">
     <div class="reveal">
       <div class="heat-card">
         <div class="hc-label">🌡️ Dhaka Rooftop Surface</div>
-        <div class="hc-temp">৪৮°C</div>
-        <div class="hc-city">গ্রীষ্মে ঢাকার ছাদের গড় তাপমাত্রা</div>
-        <div class="bar-row"><div class="bar-label">খালি ছাদ</div><div class="bar-track"><div class="bar-fill r" style="width:90%"></div></div><div class="bar-val">48°</div></div>
-        <div class="bar-row"><div class="bar-label">আমাদের বাগান</div><div class="bar-track"><div class="bar-fill g" style="width:52%"></div></div><div class="bar-val">28°</div></div>
-        <div class="bar-row"><div class="bar-label">বায়ু মান</div><div class="bar-track"><div class="bar-fill g" style="width:75%"></div></div><div class="bar-val">+40%</div></div>
-        <div class="bar-row"><div class="bar-label">সম্পত্তির মূল্য</div><div class="bar-track"><div class="bar-fill g" style="width:65%"></div></div><div class="bar-val">+15%</div></div>
+        <div class="hc-temp">48°C</div>
+        <div class="hc-city">Average summer rooftop · Dhaka</div>
+        <div class="bar-row"><div class="bar-label">Bare concrete</div><div class="bar-track"><div class="bar-fill r" style="width:90%"></div></div><div class="bar-val">48°</div></div>
+        <div class="bar-row"><div class="bar-label">With our garden</div><div class="bar-track"><div class="bar-fill g" style="width:52%"></div></div><div class="bar-val">28°</div></div>
+        <div class="bar-row"><div class="bar-label">Air quality</div><div class="bar-track"><div class="bar-fill g" style="width:75%"></div></div><div class="bar-val">+40%</div></div>
+        <div class="bar-row"><div class="bar-label">Property value</div><div class="bar-track"><div class="bar-fill g" style="width:65%"></div></div><div class="bar-val">+15%</div></div>
       </div>
     </div>
     <div class="reveal">
-      <div class="section-label">সমস্যা যা আমরা সমাধান করি</div>
-      <h2 class="section-title">ঢাকার গরম আপনার<br/><em>ছাদ নষ্ট করছে।</em></h2>
-      <p class="section-bn">গুলশান থেকে বসুন্ধরা — ঢাকার বেশিরভাগ ছাদ খালি পড়ে থাকে। গরমে কেউ উঠতে পারে না, কারণ জানে না কোথা থেকে শুরু করবে।</p>
+      <div class="section-label">The Problem We Solve</div>
+      <h2 class="section-title">Dhaka's heat is<br/><em>destroying your rooftop.</em></h2>
+      <p class="section-desc">Building owners across Dhaka have empty rooftops baking at 48°C. Every year that heat pushes into your home, raises your electricity bill, and kills the city.</p>
       <div class="problem-list">
         <div class="problem-item">
           <div class="pi-icon">😰</div>
-          <div>
-            <div class="pi-bn">ভালো গাছ কোথায় পাবেন জানেন না</div>
-            <div class="pi-desc">Most Dhaka owners who try end up with low-quality plants that die within months — wasting money and trust.</div>
-          </div>
+          <div><div class="pi-title">No idea where to source quality plants</div><div class="pi-desc">Most Dhaka owners who try end up with low-quality plants that die within months — wasting money and motivation.</div></div>
         </div>
         <div class="problem-item">
           <div class="pi-icon">🤷</div>
-          <div>
-            <div class="pi-bn">মাটি ও রক্ষণাবেক্ষণ নিয়ে কোনো ধারণা নেই</div>
-            <div class="pi-desc">Rooftop gardening needs specific soil mixes, drainage, and weight management. Without this, every plant fails.</div>
-          </div>
+          <div><div class="pi-title">Zero knowledge on soil and maintenance</div><div class="pi-desc">Rooftop gardening needs specific soil mixes, drainage, and weight management. Without this, every plant fails.</div></div>
         </div>
         <div class="problem-item solved">
           <div class="pi-icon">✅</div>
-          <div>
-            <div class="pi-bn">আমরা সবটা করে দিই — আপনি শুধু দেখুন</div>
-            <div class="pi-desc">Design, sourcing, installation, expert maintenance — completely turn-key. One call to us is all it takes.</div>
-          </div>
+          <div><div class="pi-title">We eliminate every friction point</div><div class="pi-desc">Design → sourcing → installation → expert maintenance. Completely turn-key. You watch it happen.</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ HOW IT WORKS ══ -->
+<!-- ══════════ HOW IT WORKS ══════════ -->
 <section id="how-it-works">
   <div style="max-width:1200px;margin:0 auto;">
-    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
-      <div class="section-label" style="justify-content:center;"><span style="display:none"></span>কীভাবে কাজ করি</div>
-      <h2 class="section-title">ভিডিও পাঠান, সবুজ ছাদ<br/><em>পান কয়েক সপ্তাহে।</em></h2>
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 0;">
+      <div class="section-label" style="justify-content:center;"><span style="display:none"></span>The Process</div>
+      <h2 class="section-title">From video to<br/><em>living rooftop</em> in weeks.</h2>
     </div>
     <div class="process-grid reveal">
       <div class="process-step">
-        <div class="ps-num">০১ / ০৪</div>
+        <div class="ps-num">01 / 04</div>
         <span class="ps-icon">📱</span>
-        <div class="ps-bn">ছাদের ভিডিও পাঠান</div>
-        <div class="ps-title">Send Your Rooftop Video</div>
+        <div class="ps-title">Send Us Your Rooftop Video</div>
         <div class="ps-desc">Walk around your rooftop with your phone. Fill a short form. 5 minutes. No site visit needed from us.</div>
-        <span class="ps-tag">বিনামূল্যে · No commitment</span>
+        <span class="ps-tag">Free · No commitment</span>
       </div>
       <div class="process-step">
-        <div class="ps-num">০২ / ০৪</div>
+        <div class="ps-num">02 / 04</div>
         <span class="ps-icon">🎨</span>
-        <div class="ps-bn">৪৮ ঘণ্টায় ডিজাইন পান</div>
         <div class="ps-title">Receive Your Design & Quote</div>
-        <div class="ps-desc">A visual mood board with plant selections matched to your space plus a transparent quote — within 48 hours.</div>
-        <span class="ps-tag">৪৮ ঘণ্টার মধ্যে</span>
+        <div class="ps-desc">Within 48 hours — a visual mood board with plant selections matched to your space plus a transparent quote.</div>
+        <span class="ps-tag">Within 48 hours</span>
       </div>
       <div class="process-step">
-        <div class="ps-num">০৩ / ০৪</div>
+        <div class="ps-num">03 / 04</div>
         <span class="ps-icon">🏗️</span>
-        <div class="ps-bn">আমরা সব ইনস্টল করি</div>
         <div class="ps-title">We Install Everything</div>
-        <div class="ps-desc">Our expert team arrives on the agreed day. Soil, plants, irrigation — handled completely.</div>
+        <div class="ps-desc">Our expert team arrives on the agreed day. Soil, plants, irrigation — handled completely. You just approve.</div>
         <span class="ps-tag gold">Premium installation</span>
       </div>
       <div class="process-step">
-        <div class="ps-num">০৪ / ০৪</div>
+        <div class="ps-num">04 / 04</div>
         <span class="ps-icon">🔄</span>
-        <div class="ps-bn">সারা বছর দেখাশোনা করি</div>
         <div class="ps-title">We Maintain It Forever</div>
-        <div class="ps-desc">Expert visits every 4 months. Soil testing, pruning, nutrients, pest control. WhatsApp support anytime.</div>
+        <div class="ps-desc">Expert visits every 4 months. Soil testing, pruning, nutrients, pest control. Live WhatsApp support anytime.</div>
         <span class="ps-tag">Subscription care</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ BUNDLE PREVIEW ══ -->
+<!-- ══════════ BUNDLE PREVIEW ══════════ -->
 <section class="alt">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="reveal">
-      <div class="section-label">আমাদের গার্ডেন প্যাকেজ</div>
-      <h2 class="section-title">তিনটি প্রিমিয়াম<br/><em>ছাদ অভিজ্ঞতা।</em></h2>
-      <p class="section-desc">Every garden is drawn from one of three expert-curated packages — designed for Dhaka's climate and your specific goal.</p>
+      <div class="section-label">Our Gardens</div>
+      <h2 class="section-title">Three premium<br/><em>rooftop experiences.</em></h2>
+      <p class="section-desc">Every garden is drawn from one of three expert-curated packages — designed for Dhaka's climate, your nursery partner's supply chain, and your specific goal.</p>
     </div>
     <div class="bundle-preview-grid reveal">
       <a href="gardens.html#lounge" class="bp-card">
@@ -606,12 +445,11 @@ footer{background:var(--green-deep);padding:64px 8vw 32px;}
           <div class="bp-bg-emoji">🛋️</div>
           <span class="bp-emoji">🛋️</span>
           <div class="bp-name">Aesthetic Lounge</div>
-          <div class="bp-tag">সৌন্দর্য · কম রক্ষণাবেক্ষণ</div>
+          <div class="bp-tag">Beauty-first · Low maintenance</div>
         </div>
         <div class="bp-body">
-          <div class="bp-bn">আপনার ছাদকে বানান আলো-বাতাসের বৈঠকখানা।</div>
-          <div class="bp-desc">Premium ornamental plants, trailing greenery, and a relaxation-ready layout.</div>
-          <div class="bp-cta">Explore this garden</div>
+          <div class="bp-desc">Premium ornamental plants, trailing greenery, and a relaxation-ready layout. Your rooftop as a living room.</div>
+          <div class="bp-cta">Explore this garden </div>
         </div>
       </a>
       <a href="gardens.html#orchard" class="bp-card">
@@ -619,12 +457,11 @@ footer{background:var(--green-deep);padding:64px 8vw 32px;}
           <div class="bp-bg-emoji">🍋</div>
           <span class="bp-emoji">🍋</span>
           <div class="bp-name">Urban Orchard</div>
-          <div class="bp-tag">ফল · সবজি · ভেষজ</div>
+          <div class="bp-tag">Fruits · Vegetables · Herbs</div>
         </div>
         <div class="bp-body">
-          <div class="bp-bn">নিজের ছাদে চাষ করুন আম, লেবু, পুদিনা।</div>
-          <div class="bp-desc">Dwarf fruit trees, raised vegetable beds, a full herb row — fresh produce from your Dhaka rooftop.</div>
-          <div class="bp-cta">Explore this garden</div>
+          <div class="bp-desc">Dwarf fruit trees, raised vegetable beds, a full herb row. Fresh produce from your own Dhaka rooftop.</div>
+          <div class="bp-cta">Explore this garden </div>
         </div>
       </a>
       <a href="gardens.html#cooler" class="bp-card">
@@ -632,78 +469,75 @@ footer{background:var(--green-deep);padding:64px 8vw 32px;}
           <div class="bp-bg-emoji">🌬️</div>
           <span class="bp-emoji">🌬️</span>
           <div class="bp-name">Climate Cooler</div>
-          <div class="bp-tag">গরম কমান · বায়ু পরিশুদ্ধ করুন</div>
+          <div class="bp-tag">Heat reduction · Air quality</div>
         </div>
         <div class="bp-body">
-          <div class="bp-bn">ঘরের ভেতর ঠান্ডা রাখুন, AC বিল কমান।</div>
-          <div class="bp-desc">Maximum foliage for shade and cooling. The scientific answer to Dhaka's 48°C heat.</div>
-          <div class="bp-cta">Explore this garden</div>
+          <div class="bp-desc">Maximum foliage density for shade, cooling, and air purification. The scientific answer to Dhaka's 48°C heat.</div>
+          <div class="bp-cta">Explore this garden </div>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ══ TESTIMONIALS ══ -->
+<!-- ══════════ TESTIMONIALS ══════════ -->
 <section>
   <div style="max-width:1200px;margin:0 auto;">
     <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
-      <div class="section-label" style="justify-content:center;"><span style="display:none;"></span>ক্লায়েন্টদের কথা</div>
-      <h2 class="section-title">আসল ঢাকার ছাদ।<br/><em>আসল ফলাফল।</em></h2>
+      <div class="section-label" style="justify-content:center;"><span style="display:none;"></span>What Clients Say</div>
+      <h2 class="section-title">Real Dhaka rooftops.<br/><em>Real results.</em></h2>
     </div>
     <div class="trust-grid reveal">
       <div class="trust-card">
         <div class="trust-stars">★★★★★</div>
-        <div class="trust-quote">"৬ বছর ধরে ছাদটা খালি পড়ে ছিল। এখন বাড়ির সবচেয়ে সুন্দর জায়গা। ৪৮ ঘণ্টায় যে ডিজাইন পাঠাল, দেখেই বললাম — হ্যাঁ।"</div>
+        <div class="trust-quote">"I had a completely empty rooftop for 6 years. Now it's the most beautiful part of my home. The 2D design they sent in 48 hours made me say yes immediately."</div>
         <div class="trust-author">
           <div class="trust-avatar">🏠</div>
-          <div><div class="trust-name">Karim H.</div><div class="trust-loc">গুলশান · Aesthetic Lounge</div></div>
+          <div><div class="trust-name">Karim H.</div><div class="trust-loc">Gulshan · Aesthetic Lounge</div></div>
         </div>
       </div>
       <div class="trust-card">
         <div class="trust-stars">★★★★★</div>
-        <div class="trust-quote">"গরমে উপরের তলায় টেকা যেত না। Climate Cooler লাগানোর পর সত্যিই ফরক বোঝা যাচ্ছে — ভেতর থেকেই টের পাই।"</div>
+        <div class="trust-quote">"My top floor used to be unbearable in summer. After the Climate Cooler install the temperature difference is real. I can feel it inside the flat."</div>
         <div class="trust-author">
           <div class="trust-avatar">🏢</div>
-          <div><div class="trust-name">Fatema R.</div><div class="trust-loc">ধানমন্ডি · Climate Cooler</div></div>
+          <div><div class="trust-name">Fatema R.</div><div class="trust-loc">Dhanmondi · Climate Cooler</div></div>
         </div>
       </div>
       <div class="trust-card">
         <div class="trust-stars">★★★★★</div>
-        <div class="trust-quote">"প্রতি সপ্তাহে ছাদ থেকে লেবু, পুদিনা তুলি। ওরা সব দেখাশোনা করে — আমি কিছুই করি না। Health report পাওয়াটা সত্যিই চমৎকার।"</div>
+        <div class="trust-quote">"We harvest fresh lemons and herbs from our rooftop every week. The team maintains everything — I literally do nothing. The health reports are a brilliant touch."</div>
         <div class="trust-author">
           <div class="trust-avatar">🌿</div>
-          <div><div class="trust-name">Rahim ও Nadia A.</div><div class="trust-loc">বসুন্ধরা · Urban Orchard</div></div>
+          <div><div class="trust-name">Rahim & Nadia A.</div><div class="trust-loc">Bashundhara · Urban Orchard</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ CTA BAND ══ -->
+<!-- ══════════ CTA BAND ══════════ -->
 <div class="cta-band reveal">
-  <h2>আপনার ছাদ বদলে দিতে<br/><em>আমরা প্রস্তুত।</em></h2>
-  <span class="bn">আজই ভিডিও পাঠান — ৪৮ ঘণ্টায় বিনামূল্যে ডিজাইন পান।</span>
-  <p>Zero obligation. No site visit needed. Just your rooftop video.</p>
-  <div class="cta-actions">
-    <a href="contact.html" class="btn-light">বিনামূল্যে ডিজাইন নিন →</a>
-    <a href="calculator.html" class="btn-outline-light">Calculator দেখুন</a>
+  <h2>Ready to transform<br/><em>your rooftop?</em></h2>
+  <p>Send us a short video. Get your free 2D design and quote within 48 hours. Zero obligation.</p>
+  <div class="actions">
+    <a href="contact.html" class="btn-light">Get Free Design →</a>
+    <a href="calculator.html" class="btn-outline-light">Try the Calculator</a>
   </div>
 </div>
 
-<!-- ══ FOOTER ══ -->
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div class="footer-grid">
     <div>
       <div class="footer-brand-logo">
         <div class="fbl-icon">🌿</div>
-        <div class="fbl-name">Urban Rooftop Oasis<small>ঢাকার ছাদ বাগান বিশেষজ্ঞ</small></div>
+        <div class="fbl-name">Urban Rooftop Oasis<small>Dhaka · Bangladesh</small></div>
       </div>
-      <p class="footer-bn">ঢাকার কংক্রিটের ছাদকে সবুজ জীবন্ত বাগানে রূপান্তর করি — একটি ছাদ, একবারে।</p>
-      <p class="footer-desc">Dhaka's premium rooftop garden design, installation & expert maintenance.</p>
+      <p class="footer-desc">Dhaka's premium rooftop garden design, installation & expert maintenance. Turning dead concrete into living, breathing oases — one rooftop at a time.</p>
       <div class="footer-contact">📲 +880 1859-929858</div>
-      <div class="footer-contact">✉️ hasibul.alam.siam@gmail.com</div>
-      <div class="footer-contact">📍 গুলশান · বনানী · বসুন্ধরা</div>
+      <div class="footer-contact">✉️ hello@urbanrooftopoasis.com</div>
+      <div class="footer-contact">📍 Serving all Dhaka areas</div>
     </div>
     <div>
       <div class="footer-col-title">Pages</div>
@@ -716,7 +550,7 @@ footer{background:var(--green-deep);padding:64px 8vw 32px;}
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">আমাদের গার্ডেন</div>
+      <div class="footer-col-title">Our Gardens</div>
       <ul class="footer-col-links">
         <li><a href="gardens.html#lounge">Aesthetic Lounge</a></li>
         <li><a href="gardens.html#orchard">Urban Orchard</a></li>
@@ -734,26 +568,30 @@ footer{background:var(--green-deep);padding:64px 8vw 32px;}
   </div>
   <div class="footer-bottom">
     <div class="footer-copy">© 2025 Urban Rooftop Oasis · All rights reserved · Dhaka, Bangladesh</div>
-    <div class="footer-heat">🔥 ঢাকার গরমের বিরুদ্ধে লড়াই</div>
+    <div class="footer-heat">🔥 Fighting Dhaka's urban heat, one rooftop at a time</div>
   </div>
 </footer>
 
 <script>
+// CURSOR
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.borderColor='rgba(122,173,74,0.7)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(122,173,74,0.4)';});
+});
 // NAV SCROLL
 const nav=document.getElementById('mainNav');
-window.addEventListener('scroll',()=>nav.style.boxShadow=window.scrollY>40?'0 2px 20px rgba(45,92,24,0.12)':'');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
 // MOBILE NAV
 document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navDrawer').classList.toggle('open'));
 function closeDrawer(){document.getElementById('navDrawer').classList.remove('open');}
 // REVEAL
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-// BAR ANIMATION
-const bars=document.querySelectorAll('.bar-fill');
-const barObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){bars.forEach(b=>{const w=b.style.width;b.style.width='0';setTimeout(()=>{b.style.width=w;},100);});barObs.disconnect();}});
-},{threshold:.3});
-if(bars.length) barObs.observe(bars[0]);
 </script>
 </body>
 </html>
